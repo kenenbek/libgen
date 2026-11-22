@@ -1,0 +1,36 @@
+{
+  "100406413": {
+    "md5": "184c16eae281bf2ebea72eb6d7aa6f6d",
+    "pages": "29",
+    "time_added": "2023-07-12 00:23:38",
+    "filesize": "350208",
+    "extension": "epub",
+    "locator": "Harry Potter a l'ecole des sorciers.epub",
+    "libgen_id": "4920181",
+    "libgen_topic": "f",
+    "editions": {
+      "100571437": {
+        "e_id": "144156688",
+        "time_added": "2023-07-12 00:23:38",
+        "time_last_modified": "2023-07-12 00:23:38"
+      }
+    }
+  },
+  "104838884": {
+    "md5": "abed2924cd3eedf0fac0c8d94a22620a",
+    "pages": "0",
+    "time_added": "2024-04-26 05:16:39",
+    "filesize": "3625273",
+    "extension": "epub",
+    "locator": "Python Essentials 1.epub",
+    "libgen_id": "5545006",
+    "libgen_topic": "l",
+    "editions": {
+      "104189689": {
+        "e_id": "147748488",
+        "time_added": "2024-04-26 05:16:39",
+        "time_last_modified": "2024-04-26 05:16:39"
+      }
+    }
+  }
+}

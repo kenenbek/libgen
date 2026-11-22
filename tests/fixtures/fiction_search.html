@@ -1,0 +1,1045 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="max-age=604800, must-revalidate">
+	<meta name="rating" content="general">
+	<!--<link href="/rss/index.php" rel="alternate" type="application/rss+xml" title="News" />-->
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+	<title>Library Genesis</title>
+		
+	<!--[if IE 6]>
+	<style>
+		body {behavior: url("/csshover3.htc");}
+		#menu li .drop {background:url("img/drop.gif") no-repeat right 8px; 
+	</style>
+	<![endif]-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">	
+	
+<link href="/css/font.min.css" rel="stylesheet">	
+<style>
+nav.navbar .dropdown:hover > .dropdown-menu {
+ display: block; 
+}
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			font-size: 3.5rem;
+		}
+	}
+
+.panel-heading .accordion-toggle:after {
+    font-family: "Glyphicons Halflings";  
+    content: "\e114";    
+    float: right;       
+    color: grey;         
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\e080";   
+}
+.tooltip-inner {
+    max-width: 350px;
+    width: 350px; 
+}
+h1 {
+	display: block; 
+	font-size: 1.8rem; 
+	font-weight: bold; 
+	font-family: Georgia, "Times New Roman", Times, serif;  color: #A00000; 
+}
+#tablelibgen td { 
+	font-family: "Pt Sans", Tahoma, Helvetica, sans-serif; 
+	margin: 0; 
+	padding: 0em 3px; 
+	font-size: 1rem;
+}
+
+#tablelibgen1 td { 
+	font-family: "Pt Sans", Tahoma, Helvetica, sans-serif; 
+	margin: 0; 
+	padding: 0em 3px; 
+	font-size: 1rem;
+}
+
+.taghide {
+    display: none; 
+}
+.taghide + label ~ div {
+    display: none;
+}
+/* оформляем текст label */
+.taghide + label {
+    display: inline-block; 
+}
+/* вид текста label при активном переключателе */
+
+/* когда чекбокс активен показываем блоки с содержанием  */
+.taghide:checked + label + div {
+    display: block; 
+}
+
+
+
+/*.navbar {
+	background-color: #BBBBBB;
+}*/
+	</style>
+
+	<link rel="stylesheet" href="/css/dark-mode.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/paginator3000.css" />
+<script type="text/javascript" src="../js/paginator3000.js"></script><script data-cfasync="false" async type="text/javascript" src="//je.deuxseethe.com/rUJqARoMIAl18z/146156"></script>
+
+
+
+
+</head>
+<body>    
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary  mb-1">
+  
+   <a class="navbar-brand" href="/index.php">
+    <img src="/img/logo.png"  height="30" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/community/app.php/article/news">NEWS <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/community/">FORUM <span class="sr-only">(current)</span></a>
+      </li>
+	
+      <li class="nav-item dropdown">
+<a class="btn btn-secondary dropdown-toggle" href="/community/ucp.php?mode=login" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LOGIN
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">    
+          <a class="dropdown-item" href="/community/ucp.php?mode=register">Register</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          DOWNLOAD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">      
+
+          <a class="dropdown-item" href="/mirrors.php">Mirrors</a>
+          <a class="dropdown-item" href="http://libgenfrialc7tguyjywa36vtrdcplwpxaw43h6o63dmmwhvavo5rqqd.onion/">TOR</a>
+
+	<div class="dropdown-divider"></div>
+         <h6 class="dropdown-header">P2P</h6>
+          <a class="dropdown-item" href="/torrents/">Torrents</a>
+          <a class="dropdown-item" href="https://ipdl.cat/data/torrents.html">Torrents status</a>
+          <a class="dropdown-item" href="/nzb/">Usenet (*.nzb)</a>
+          <a class="dropdown-item" href="/soft/">Soft</a>
+	<!--https://phillm.net/libgen-stats-table.php-->
+
+
+
+
+	<div class="dropdown-divider"></div>
+         <h6 class="dropdown-header">DB Dumps</h6>
+          <a class="dropdown-item" href="/dirlist.php?dir=dbdumps">Libgen</a>
+          <a class="dropdown-item" href="http://libgen.rs/dbdumps/">libgen.rs (gen.lib.rus.ec)</a>
+
+	<!--<div class="dropdown-divider"></div>
+ 	 <a class="dropdown-item" href="/magz0/">Unsorted magz</a>
+ 	 <a class="dropdown-item" href="/fict0/">Unsorted fiction</a>
+
+	 <a class="dropdown-item" href="/comics4/">Unsorted comics</a>
+        </div>-->
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="librarian.php" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          UPLOAD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+          <a class="dropdown-item" href="ftp://ftp.libgen.bz/upload/">FTP</a> 
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="/index.php?req=fmode:last&topics1=all" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LAST
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+	<a class="dropdown-item" href="/index.php?req=fmode:last&topics1=all"><b>Files</b></a>
+
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=l">Libgen</a>
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=a">Scientific Articles</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=f">Fiction</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=c">Comics</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=m">Magazines</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=s">Standards</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=r">Fiction RUS</a>
+	<div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=e">Editions</a> 
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=s">Series</a>
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=p">Publishers</a> 
+        <!--  <a class="dropdown-item" href="/index.php?req=mode:last&curtab=f">Files</a> -->
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=a">Authors</a> 
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=w">Works</a>
+
+
+  
+        </div>
+
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          OTHERS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+          <a class="dropdown-item" href="json.php">API</a> 
+          <a class="dropdown-item" href="rss.php">RSS</a> 
+          <a class="dropdown-item" href="top.php">Top 100 users</a> 
+          <a class="dropdown-item" href="stat.php">Stats</a>
+
+	<a class="dropdown-item" href="topics.php">Topics</a>
+
+          <a class="dropdown-item" href="batchsearchindex.php">Batch search</a>  
+          <a class="dropdown-item" href="biblioservice.php">Bibliographic services</a>
+          <a class="dropdown-item" href="https://wiki.mhut.org/software:libgen_desktop">Libgen librarian for desktop</a>
+
+
+          <a class="dropdown-item" href="/code/">Source (PHP)</a>
+          <a class="dropdown-item" href="/soft/">LG soft</a>
+          <!--<a class="dropdown-item" href="/import/">Import local files in LG format</a>-->
+          <a class="dropdown-item" href="https://z-library.se/fulltext/">Full text search</a>
+
+
+
+        </div>
+      </li>
+
+
+
+     <!-- <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="topics.php" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          Topics
+        </a>
+      </li>
+-->
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LINKS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+
+
+          
+          <a class="dropdown-item" href="http://sci-hub.ru">Sci-hub</a> 
+          <a class="dropdown-item" href="http://magzdb.org">Magzdb.org</a>
+
+          <a class="dropdown-item" href="http://nlr.ru/rlin/Periodika_rus.php">РНБ</a>
+          <a class="dropdown-item" href="http://rsl.ru/">РГБ</a>
+          <a class="dropdown-item" href="http://loc.gov/">LOC</a>
+          <a class="dropdown-item" href="https://comicvine.gamespot.com/">ComicVine</a>
+          <a class="dropdown-item" href="http://cyberleninka.ru/">Cyberleninka</a>
+          <a class="dropdown-item" href="http://lib.rus.ec/">Lib.rus.ec</a>
+          <a class="dropdown-item" href="http://flibusta.is/">Flibusta.is</a>
+          <a class="dropdown-item" href="http://goodreads.com/">Goodreads.com</a>
+          <a class="dropdown-item" href="http://worldcat.org/">Worldcat.org</a>
+          <a class="dropdown-item" href="https://wiki.archiveteam.org/">Archive team</a>
+          <a class="dropdown-item" href="https://www.reddit.com/r/libgen/">Reddit</a>
+          <a class="dropdown-item" href="http://annas-archive.org/">Anna's Archive</a>
+          <a class="dropdown-item" href="https://welib.org/">Welib</a>
+          <a class="dropdown-item" href="https://open-slum.org/">The Shadow Library Uptime Monitor</a>
+
+        </div>
+
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary" href="index.php?req=mode:req&curtab=e" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          WANTED
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="nav-link">
+
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="darkSwitch">
+      <label class="custom-control-label" for="darkSwitch">🌓</label>
+    </div>
+    <script src="/js/dark-mode-switch.js"></script>
+  </div>
+   <a class="navbar-brand" href="setlang.php?req=harry+potter&curtab=f&res=10&lang=ru">RU</a>
+</nav>
+<form class="card p-2 needs-validation" novalidate id="formlibgen" action="index.php" enctype="multipart/form-data" METHOD="GET">
+<div class="input-group mb-3" >
+	<input autofocus type="text" class="form-control" placeholder="Input value" name="req" aria-label="input text" aria-describedby="button-addon2" value="harry potter" required>
+	<div class="input-group-append">
+	<button class="btn btn-outline-secondary"  id="button-addon2" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&#128269;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+	</div>
+
+	<div class="invalid-feedback">Input value</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8">	
+			<div class="d-block" id="topic">
+				<strong>Search in fields:</strong>
+				<input type="checkbox" checked class="column-input" id="colt" name="columns[]" value="t">
+				<label class="column-label" for="coltitle">Title</label>
+				<input type="checkbox" checked class="column-input" id="cola" name="columns[]" value="a">
+				<label class="column-label" for="colauthor">Author(s)</label>
+				<input type="checkbox" checked class="column-input" id="cols" name="columns[]" value="s">
+				<label class="column-label" for="colseries">Series</label>
+				<input type="checkbox" checked class="column-input" id="coly" name="columns[]" value="y">
+				<label class="column-label" for="colyear">Year</label>
+				<input type="checkbox" checked class="column-input" id="colp" name="columns[]" value="p">
+				<label class="column-label" for="colpublisher">Publisher</label>
+				<input type="checkbox" checked class="column-input" id="coli" name="columns[]" value="i">
+				<label class="column-label" for="colisbn">ISBN</label>
+	  		</div>
+	
+	  		<div class="d-block" id="object">
+				<strong>Search in objects:</strong>
+				<input type="checkbox" checked class="column-input" id="objf" name="objects[]" value="f">
+				<label class="column-label" for="objf">Files</label>
+				<input type="checkbox" checked class="column-input" id="obje" name="objects[]" value="e">
+				<label class="column-label" for="obje">Editions</label>
+				<input type="checkbox" checked class="column-input" id="objs" name="objects[]" value="s">
+				<label class="column-label" for="objs">Series</label>
+				<input type="checkbox" checked class="column-input" id="obja" name="objects[]" value="a">
+				<label class="column-label" for="obja">Authors</label>
+				<input type="checkbox" checked class="column-input" id="objp" name="objects[]" value="p">
+				<label class="column-label" for="objp">Publishers</label>
+				<input type="checkbox" checked class="column-input" id="objw" name="objects[]" value="w">
+				<label class="column-label" for="objw">Works</label>
+			</div>
+			<div class="d-block" id="column">
+				<strong>Search in topics :</strong>
+				<input type="checkbox" checked class="column-input" id="topl" name="topics[]" value="l" >
+				<label class="column-label" for="topl">Libgen</label>
+				<input type="checkbox" checked class="column-input" id="topc" name="topics[]" value="c" >
+				<label class="column-label" for="topc">Comics</label>
+				<input type="checkbox" checked class="column-input" id="topf" name="topics[]" value="f" >
+				<label class="column-label" for="topf">Fiction</label>
+				<input type="checkbox" checked class="column-input" id="topa" name="topics[]" value="a" >
+				<label class="column-label" for="topa">Scientific Articles</label>
+				<input type="checkbox" checked class="column-input" id="topm" name="topics[]" value="m" >
+				<label class="column-label" for="topm">Magazines</label>
+				<input type="checkbox" checked class="column-input" id="topr" name="topics[]" value="r" >
+				<label class="column-label" for="topr">Fiction RUS</label>
+				<input type="checkbox" checked class="column-input" id="tops" name="topics[]" value="s" >
+				<label class="column-label" for="tops">Standards</label>
+			</div>
+ 		</div>
+		<div class="col-4">
+
+			<!--<div >
+				<strong>Results per page:</strong>
+
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res25" name="res" class="custom-control-input" value="25" checked>
+				<label class="custom-control-label" for="res25">25</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res50" name="res" class="custom-control-input" value="50" >
+				<label class="custom-control-label" for="res50">50</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res100" name="res" class="custom-control-input" value="100" >
+				<label class="custom-control-label" for="res100">100</label>
+
+				</div>
+ 			</div>
+			-->
+			<div class="d-block">
+				<table><tr><td>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="covers" name="covers" >
+						<label class="custom-control-label" for="covers"><strong>Show Covers</strong></label>
+						<script type="text/javascript">
+						$("input[id=covers]").change(function(){
+							if($(this).is(":checked")==false)
+							{
+								document.cookie = "covers=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+							}
+						});				
+						</script>
+					</div>
+					</td><td> 
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="showch" name="showch" >
+						<label class="custom-control-label" for="showch"><strong>Show chapters</strong></label>
+						<script type="text/javascript">
+						$("input[id=showch]").change(function(){
+							if($(this).is(":checked")==false)
+							{
+								document.cookie = "showch=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+							}
+						});				
+						</script>
+					</div>
+				</td></tr></table>
+
+ 			</div>
+
+			<div class="d-block">
+
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="gmode" name="gmode" >
+					<label class="custom-control-label" for="gmode" ><strong>Google mode <a href="#" data-toggle="modal" data-target="#googlemodemodal">?</a></strong></label>
+					<script type="text/javascript">
+					$("input[id=gmode]").change(function(){
+						if($(this).is(":checked")==false)
+						{
+							document.cookie = "gmode=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+						}
+					});
+					</script>
+					
+				</div>
+ 			</div>
+
+			<div >
+
+
+				<strong>Seach in files:</strong>
+
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="all" name="filesuns" class="custom-control-input" value="all" checked>
+				<label class="custom-control-label" for="all">All</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="sort" name="filesuns" class="custom-control-input" value="sort" >
+				<label class="custom-control-label" for="sort">Only sorted</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="unsort" name="filesuns" class="custom-control-input" value="unsort" >
+				<label class="custom-control-label" for="unsort">Only uns.</label>
+				</div>
+
+
+
+ 			</div>
+
+ 		</div>
+	</div>
+</div>
+</form><ul class="nav nav-tabs "><li class="nav-item">
+ <a class="nav-link active " href="/index.php?req=harry+potter&res=10&curtab=f">Files <span class="badge badge-primary">8082</span> <i>Showing the first  2000</i></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=harry+potter&res=10&curtab=e">Editions <span class="badge badge-primary">8732</span></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=harry+potter&res=10&curtab=s">Series <span class="badge badge-primary">26</span></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=harry+potter&res=10&curtab=a">Authors <span class="badge badge-primary">1</span></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=harry+potter&res=10&curtab=p">Publishers <span class="badge badge-primary">0</span></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=harry+potter&res=10&curtab=w">Works <span class="badge badge-primary">477</span></a>
+</li><li class="navbar-right" style="float: right !important;"><a class="nav-link" href="/json.php?object=f&ids=100406413,100406414,100406415,100406416,100406420,100406421,102019171,97417190,97417191,97417192,97417193,97417171,97417172,97417173,97417174,97417175,97417176,97417177,97417178,97417179,97417181,97417194,97417195,106526917,97417182,97417183,97417184,97417185,97417186,97417187,97417188,97417189,96961306,97202545,6597532,6597533,97202546,97202547,98597373,98597962,98701406,98770888,98890566,98912189,100406418,92639338,93614530,98506583,98507433,98518853,98959116,115974006,116246984,93747393,99627259,100334483,101896669,102464794,116246908,116247009,2607877,2607878,2614163,2677445,2677446,2745349,2745350,2748634,2748638,2802019,101399140,101399627,101416407,101420173,2607873,2607874,2607875,2614159,2614160,2614161,2635007,2635366,2635371,2635383,2676190,2676270,2676712,2677441,2677442,2677443,2684406,2714991,2715149,2715192,2715194,2715886,2715901,2718756,2745344,2745345,2745346,2748629,2748630,2748631,2782296,2833613,2906068,4965493,6065684,6065685,6065686,6065687,6065688,6065689,6442959,6514941,6514942,6514943,6514944,6514945,6514947,6597546,91651476,91754559,91754902,91864170,91864172,93346849,96909194,97658456,97658512,97659397,97659409,97659658,97659795,99558275,99558279,99558280,99558281,99582032,99582033,99582034,99582035,99582036,99582037,99582038,99608734,99608751,99608932,99771076,99923671,100334502,100406419,100707797,100707799,100707800,100707801,100707802,100707803,100707807,101794208,101794209,102163077,102163701,102164364,102164369,102164840,102164954,102231728,104905029,104905033,104905034,104905035,105022739,105022743,112325792,112325800,112325804,112929469,112929470,112929471,112929472,112929474,112929475,112953099,113011514,113018940,113074185,113074187,113074188,113074190,113074191,113074192,113163136,113163137,113163138,113295021,113496927,113517767,114329616,114329617,114329619,114329621,114794143,114794144,114794145,114794146,114794147,114794148,114794149,114842164,116246944,2607876,2614162,2677444,2745348,2748632,2927749,100334497,100334499,100334504,100349710,100349713,100349717,100698877,114842166,6514946,100698881,152930,664699,803162,803163,861173,925314,2607872,2613989,2614157,2631836,2635367,2635368,2635369,2635370,2635378,2635380,2635381,2635382,2676191,2676192,2676193,2676194,2676271,2676272,2676273,2676276,2676714,2676715,2676716,2676717,2677440,2714750,2715300,2718959,2718979,2718988,2718989,2719086,2719090,2719115,2722567,2724155,2727728,2727849,2728598,2728599,2728600,2728602,2728603,2728604,2728605,2729237,2729239,2735549,2741389,2742366,2745343,2748628,2793792,2794826,2798236,2802009,2802011,2802014,2802016,2802017,2802018,2802051,2802056,2802062,2802063,2833606,2833607,2833608,2833609,2833610,2833611,2833612,2910292,2958544,2992003,2992749,2999064,2999176,2999216,2999282,2999283,2999445,2999446,2999874,2999890,2999956,3000108,3006766,3006767,3006768,3006769,3012555,3012556,3012558,3012559,3012560,3012561,3012562,3012563,3012564,3059773,3060514,3083208,3083210,3083213,3083215,3083216,3083217,3083218,3083243,3083246,3083249,3083250,3086135,3090242,3093314,3116404,3116405,3116406,3116407,3116408,3116409,3116410,3126221,3126299,3127165,3127167,3128391,3129082,3130020,3130161,3130174,3130180,3130251,3130255,3130271,3134096,3134106,3134527,3134579,3134597,3134705,3136457,3152700,3158990,3158991,3158992,3311054,3392477,3400741,3405621,3412153,3423644,3433543,3457497,3473219,3473349,3482872,3484292,3492139,3492955,3492969,3499522,3510556,3510761,3521511,3526625,3527254,3528773,3531107,3538545,3541009,3541268,3547905,3553702,3572630,3583506,3601724,3609545,3622932,3633880,3639829,3719377,3719381,3719789,3720063,3721121,3721243,3723220,3723669,3748615,3751744,3751745,3751746,3751747,3818644,3818645,3818818,3818906,3818908,3821216,4082467,4082841,4082842,4082843,4082844,4082845,4082846,4082847,4082848,4082849,4082850,4082851,4082852,4082853,4121107,4126461,4134334,4137736,4173529,4173531,4173532,4173533,4173534,4173535,4173536,4173537,4173538,4173539,4173541,4173542,4195891,4195892,4195893,4195894,4211750,4214008,4215864,4215865,4223402,4223403,4223404,4223405,4223440,4223441,4223442,4223443,4223478,4223479,4223480,4223481,4223516,4223517,4223518,4223519,4223554,4223555,4223556,4223557,4226927,4226928,4226929,4226930,4233142,4233143,4233144,4233145,4238022,4238023,4238024,4238025,4238026,4238027,4238028,4238029,4246011,4246012,4246013,4246014,4246015,4246016,4246017,4246018,4318190,4318191,4318716,4318717,4318718,4394165,4394166,4394167,4394168,4394169,4394170,4394171,4394172,4394173,4394174,4394175,4394176,4394177,4394178,4394179,4394180,4394181,4394182,4394183,4394184,4394185,4394186,4394187,4394188,4394189,4394190,4394191,4394192,4394193,4430619,4430620,4430621,4430622,4430623,4430624,4430625,4442008,4442009,4442010,4442011,4442012,4442013,4442014,4442015,4447786,4447787,4447788,4447789,4463322,4463323,4463324,4463325,4463326,4463327,4463328,4463329,4463330,4463331,4463332,4463333,4463334,4463335,4463336,4463337,4463338,4463339,4463340,4463341,4463342,4463343,4463344,4463345,4463346,4463347,4463348,4463349,4463350,4463351,4463352,4463353,4463354,4463355,4463356,4463357,4463358,4463359,4463360,4463361,4463362,4463363,4463364,4463365,4463366,4463367,4463368,4463369,4463370,4463371,4463372,4463373,4463374,4463375,4463378,4463639,4463640,4463641,4463642,4463643,4463644,4463645,4463646,4463647,4463648,4463649,4463650,4463651,4463652,4463653,4463654,4463655,4463656,4463657,4463658,4463659,4463660,4463661,4463662,4463663,4463664,4463665,4463666,4463667,4463668,4469305,4469306,4473226,4473227,4487199,4487200,4487201,4487202,4487203,4487204,4487205,4487206,4487207,4487208,4487209,4487210,4487211,4487212,4487213,4487214,4487215,4487216,4487217,4487218,4487222,4487223,4487224,4487225,4487226,4487227,4487228,4498928,4505953,4512627,4512630,4512631,4512632,4512633,4512634,4513019,4515047,4515048,4515049,4515050,4515051,4515052,4515053,4515054,4515055,4515056,4515057,4515058,4515060,4515061,4515062,4515063,4515064,4515065,4555570,4555571,4555573,4555575,4555578,4555582,4555585,4558416,4558417,4558418,4558421,4558422,4558423,4558424,4564140,4564141,4564146,4564147,4564155,4564156,4564160,4572932,4573306,4581031,4581032,4581033,4581034,4581035,4581036,4581037,4581039,4581040,4581041,4581042,4587647,4587648,4587649,4587650,4587651,4587652,4587977,4588508,4588509,4588510,4588511,4590425,4590426,4590427,4590428,4590429,4590430,4590431,4590432,4590433,4590434,4590435,4590436,4590437,4590438,4591781,4591782,4591783,4591784,4591785,4591786,4591787,4591788,4591789,4591790,4591791,4591792,4591793,4591794,4591795,4591796,4605186,4607173,4607174,4607175,4607176,4607177,4607178,4607179,4612182,4612183,4612184,4612185,4612186,4612187,4612188,4612189,4612190,4612191,4612192,4612193,4612194,4612195,4612196,4612197,4612198,4612199,4612200,4612201,4612202,4612844,4612845,4612846,4612847,4612848,4612849,4612850,4612851,4612852,4612853,4612854,4612855,4612856,4612857,4613547,4613548,4613549,4613550,4613551,4613552,4613553,4613554,4613555,4613556,4613557,4613558,4613559,4613560,4613561,4613562,4613563,4613564,4613565,4613566,4613567,4613568,4613569,4613570,4613571,4613572,4613573,4613574,4613575,4613576,4613577,4613578,4613579,4613580,4613581,4613582,4613583,4613584,4613585,4613586,4613587,4613588,4613589,4613590,4618540,4618541,4618542,4618543,4618544,4618545,4618546,4624597,4624598,4624599,4624600,4624601,4624635,4626192,4630003,4630004,4637578,4637909,4641970,4641971,4641972,4654770,4654771,4674468,4677626,4678052,4686716,4686717,4686718,4686719,4686773,4686774,4686775,4686776,4686777,4686778,4686779,4686780,4686781,4686782,4720331,4720332,4758861,4758931,4758932,4758933,4758934,4758935,4758936,4759151,4759152,4759153,4759154,4759155,4759156,4759157,4759158,4759159,4759160,4759161,4759162,4759163,4759164,4759165,4759166,4759167,4759168,4759169,4759172,4759173,4759174,4759175,4759176,4759177,4759178,4759179,4759180,4759181,4759182,4759183,4759184,4759185,4759322,4759323,4759324,4759325,4759326,4759327,4759328,4759329,4759330,4759331,4759332,4759333,4759334,4759335,4759336,4759337,4759338,4759339,4759340,4759341,4759342,4759343,4759344,4759345,4759347,4759348,4759349,4759350,4759351,4759352,4759353,4759354,4759355,4759356,4759357,4759358,4759359,4759360,4759361,4759362,4759363,4759364,4759365,4759366,4759367,4759368,4759369,4759370,4759371,4759372,4759373,4759374,4759375,4759376,4759377,4759378,4759379,4759380,4759381,4759382,4759383,4759384,4764162,4793184,4793186,4793192,4793193,4793194,4793195,4793196,4793197,4793198,4793201,4793202,4793203,4793204,4793205,4793206,4793207,4793208,4793209,4793210,4793211,4793212,4793215,4793216,4793217,4793218,4793219,4824820,4824821,4833898,4833899,4833900,4833901,4833902,4833903,4833904,4833905,4833906,4833907,4833908,4833911,4833912,4833914,4833915,4843889,4843890,4843891,4843892,4843893,4843894,4843895,4843934,4843935,4843936,4843937,4843938,4843939,4843940,4843977,4843978,4843979,4843980,4843981,4843982,4843983,4844029,4844030,4846670,4846671,4846672,4846673,4846674,4846827,4846828,4846829,4846830,4846831,4846849,4846850,4846851,4846852,4846853,4846876,4846877,4846878,4846879,4848977,4848978,4848979,4848980,4848981,4848982,4857642,4857644,4859681,4859682,4859683,4859684,4859685,4859686,4859687,4891930,4891931,4891932,4891933,4891935,4891936,4891938,4891941,4891943,4891945,4891946,4891949,4930689,4937286,4941871,4946210,4946213,4946215,4946217,4946219,4946221,4965491,4965492,4965494,4965495,4965496,4965497,4965498,4965499,5020798,5020799,5020800,5020801,5020802,5020803,5020804,5020805,5020806,5020807,5020808,5028121,5028122,5028123,5028124,5028125,5028126,5045771,5045772,5045773,5045775,5045776,5045777,5045778,5045779,5117521,5117522,5117523,5117524,5117525,5117526,5117527,5117528,5117529,5117530,5117531,5117532,5117536,5238933,5240395,5240396,5240397,5240398,5240399,5240400,5240401,5282419,5302203,5403183,5403184,5403186,5403187,5403188,5403189,5403190,5403191,5403192,5403193,5403194,5403195,5403196,5403197,5403198,5403199,5403200,5403201,5403202,5403203,5403204,5403205,5403206,5403207,5403208,5403209,5403210,5403211,5403212,5403213,5403214,5403215,5403216,5403217,5403218,5403219,5403220,5403221,5403222,5403223,5403224,5403225,5403226,5403227,5403228,5403229,5403230,5403231,5403232,5403233,5403234,5403236,5403237,5403238,5403239,5403240,5403241,5403242,5403243,5403244,5403245,5403246,5403247,5403248,5403249,5403250,5403251,5403252,5403253,5403254,5403255,5403256,5403257,5403258,5403259,5403260,5403261,5403262,5403263,5403264,5403265,5403266,5403267,5403268,5403270,5403271,5403272,5403273,5403274,5403275,5403276,5403277,5403279,5403280,5403281,5403282,5403283,5403284,5403285,5403286,5403288,5403289,5403290,5403291,5588418,5589249,5589250,5589251,5605910,5606111,5609917,5609918,5609919,5609920,5609921,5609922,5609923,5609924,5610134,5610135,5610136,5610137,5610138,5610140,5610141,5610143,5610144,5610145,5610146,5610147,5610148,5610149,5620624,5620625,5620626,5621161,5621167,5622981,5622982,5622983,5622984,5625507,5625508,5626658,5626659,5626661,5626662,5626663,5627699,5628145,5628146,5628147,5628148,5628149,5628150,5628151,5651748,5832705,5832706,5832707,5832708,5832712,5832713,5832714,5832715,5832716,5832717,5832718,5832719,5832720,5832721,5832722,5832723,5832724,5832725,5832727,5832728,5912384,5912385,5912386,5912387,5912388,5912389,5912390,5912391,5912392,5912393,5912394,5912395,5912396,5912397,5912398,5912399,5912400,5912401,5912402,5912403,5912404,5921634,5921635,5921636,5921639,5921640,5921642,5921643,5922810,5922811,5923378,5926345,5969412,5969414,5969415,5969416,5969417,5969418,5969419,5969420,5969422,5969423,5969424,5969425,5969426,5969427,5969428,5969429,5969430,5969431,5969432,5969433,5969434,5969435,5969436,5969437,5969438,5969439,5969440,5969441,5969442,5969443,5969444,5969446,5969447,5969448,5969449,5969450,5969451,5969452,5969453,5969454,5969455,5969456,5969457,5969458,5969459,5969460,5969461,5969463,5969464,5969465,5969466,5969467,5969468,5969469,5969472,5969473,6046597,6046598,6055687,6055688,6055689,6055690,6055691,6055692,6055693,6055694,6055695,6058864,6058865,6058866,6058867,6058868,6058869,6058870,6063907,6185878,6204784,6204785,6204786,6204787,6204788,6204789,6204790,6348422,6442900,6442902,6442903,6442904,6442905,6442906,6442907,6442908,6442909,6442910,6442915,6442916,6442917,6442918,6442919,6442920,6442921,6442922,6442923,6442924,6442925,6442926,6442927,6442928,6442929,6442930,6442931,6442932,6442935,6442936,6442937,6442938,6442939,6442940,6442941,6442942,6442943,6442944,6442945,6442946,6442947,6442948,6442949,6442950,6442951,6442952,6442953,6442954,6442955,6442956,6442957,6442958,6442960,6442961,6442962,6442963,6442964,6442965,6442966,6442967,6442968,6442969,6442972,6442973,6442974,6442975,6442976,6442978,6442979,6442980,6442981,6442982,6442983,6442984,6442985,6442986,6442987,6442988,6442989,6442991,6442992,6442994,6442996,6442998,6442999,6443001,6443005,6443006,6443007,6443008,6443009,6443010,6443011,6443012,6443014,6443015,6443016,6443017,6443057,6443058,6443059,6443060,6443061,6443062,6443063,6443064,6443065,6443066,6443067,6443072,6443073,6443074,6443075,6443076,6443077,6443078,6443079,6443080,6443081,6443082,6443083,6443084,6443085,6443086,6443087,6443088,6443089,6443090,6443091,6443092,6443093,6443094,6443095,6443096,6443097,6443098,6443099,6443100,6443101,6443102,6443103,6443104,6443105,6443106,6443107,6443108,6443109,6443110,6443111,6443112,6443113,6443114,6443115,6443116,6443117,6443118,6443119,6443120,6443121,6443122,6443123,6443124,6443125,6443126,6443127,6443128,6443129,6443130,6443131,6443132,6443138,6443139,6443140,6443141,6443142,6443143,6443144,6443145,6443149,6443150,6443151,6443154,6443162,6443163,6443164,6443165,6443166,6443167,6443168,6443169,6443170,6443171,6443213,6443214,6443215,6443216,6443217,6443218,6443219,6443220,6443221,6443222,6443223,6443224,6443225,6443226,6443227,6443228,6443229,6443230,6443231,6443232,6443233,6443234,6443235,6443236,6443237,6443241,6443242,6505557,6505558,6505560,6505561,6505567,6505568,6505654,6574213,6597534,6597535,6645825,6645826,6645827,6645828,6645829,6645830,6645831,6666809,6666810,6666811,6666812,6666813,6666814,91491504,91493994,91521892,91534406,91534407,91545076,91558727,91568778,91585451,91702987,91754153,91754214,91754554,91755338,92565885,92583482,93161538,93161539,93161540,93161541,93161542,93161543,93161544,93268798,93274460,93364538,93364551,93364556,93364585,93364591,93364596,93364728,93365191,93374274,93378585,93378586,93378587,93378588,93378589,93378590,93378591,93378593,93384026,93384028,93384031,93384032,93384035,93384037,93384038,93411211,93747399,96496180,96499632,96502034,96502035,96502036,96502038,96502039,96502040,96502041,96508325,96558339,96558369,96558395,96909173,96909174,96909175,96909176,96909177,96909178,96909179,96909192,96909193,96963127,96963128,96963129,96963130,96963131,96963132,96963133,96963134,96963135,96963136,96963137,96963138,96963139,96963140,96963143,97112270,97112271,97112272,97112273,97112274,97112275,97112276,97112277,97112278,97112279,97112280,97112281,97112282,97112284,97112285,97149541,97149542,97149543,97149544,97200253,97200254,97200255,97200256,97200259,97200265,97200266,97200267,97200268,97200269,97200270,97200277,97200278,97200279,97200280,97200281,97200282,97200283,97200295,97200296,97200297,97200298,97200299,97200300,97200301,97200302,97200303,97200304,97200305,97200306,97200307,97200308,97200309,97200310,97200311,97200312,97200313,97200355,97200356,97200357,97200358,97200359,97351389,97351390,97351391,97351392,97351393,97351394,97351395,97351396,97351397,97351398,97351399,97351400,97351401,97351403,97351404,97351405,97351406,97351407,97351408,97351414,97351791,97351792,97351793,97351794,97351795,97351796,97351797,97351798,97351799,97351801,97351803,97407790,97407791,97407792,97407793,97407794,97407795,97428994,97428995,97428996,97428997,97428998,97428999,97429000,97429001,97429002,97429003,97429013,97429014,97429015,97429016,97429017,97429018,97429019,97429020,97429021,97429022,97429023,97429024,97429025,97429026,97429027,97429028,97429029,97429030,97429031,97429032,97429033,97429034,97429035,97429036,97429037,97429038,97429039,97429040,97429041,97429042,97429043,97429044,97429045,97429046,97429047,97429048,97429049,97429050,97429051,97429052,97429053,97429054,97429055,97429056,97429057,97429058,97429059,97429060,97429061,97429062,97429063,97429064,97429065,97429066,97429067,97429068,97429069,97429070,97429072,97429073,97429074,97429075,97429076,97429077,97429078,97429079,97429080,97429081,97429082,97429083,97429099,97429100"><font color="black">JSON</font></a></li> </ul><div style="text-align: center;" class="paginator" id="paginator_example_top"></div><script type="text/javascript">paginator_example_top = new Paginator("paginator_example_top", 80, 25, 1, "/index.php?req=harry+potter&res=10&curtab=f&order=&ordermode=desc&filesuns=all&page=" );</script><table class="table  table-striped" id="tablelibgen"><thead><tr>
+
+<th scope="col" class="first_col"><nobr>
+ID <a href="/index.php?req=harry+potter&res=10&curtab=f&order=f_id&ordermode=asc">&#8597</a> 
+Time add. <a href="/index.php?req=harry+potter&res=10&curtab=f&order=time_added&ordermode=asc">&#8597</a> 
+Title <a href="/index.php?req=harry+potter&res=10&curtab=f&order=title&ordermode=asc">&#8597</a> 
+Series <a href="/index.php?req=harry+potter&res=10&curtab=f&order=series&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Author(s) <a href="/index.php?req=harry+potter&res=10&curtab=f&order=author&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Publisher <a href="/index.php?req=harry+potter&res=10&curtab=f&order=publisher&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Year <a href="/index.php?req=harry+potter&res=10&curtab=f&order=year&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col">Language</th>
+<th scope="col">Pages</th>
+<th scope="col"><nobr>Size  <a href="/index.php?req=harry+potter&res=10&curtab=f&order=filesize&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Ext. <a href="/index.php?req=harry+potter&res=10&curtab=f&order=extension&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col">Mirrors</th>
+</tr></thead><tbody><tr>
+
+<td><b>Harry Potter 1</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406413<br>J. K. Rowling - Harry Potter à l&#039;école des sorciers 1(Bloomsbury)" href="edition.php?id=144156688">Harry Potter à l'école des sorciers 1 <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 4920181</span></nobr>
+
+</td>
+<td>J. K. Rowling - Harry Potter- 1</td>
+<td>Bloomsbury</td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>29</td>
+<td><nobr><a href="/file.php?id=100406413">342 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=184c16eae281bf2ebea72eb6d7aa6f6d"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/184c16eae281bf2ebea72eb6d7aa6f6d?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/184c16eae281bf2ebea72eb6d7aa6f6d?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/184c16eae281bf2ebea72eb6d7aa6f6d?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/184c16eae281bf2ebea72eb6d7aa6f6d?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 3</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406414<br>J. K. Rowling  - Harry Potter et le prisonnier d&#039;Azkaban 3(Bloomsbury)" href="edition.php?id=144156689">Harry Potter et le prisonnier d'Azkaban 3 <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 4920182</span></nobr>
+
+</td>
+<td>J. K. Rowling - Harry Potter- 3</td>
+<td>Bloomsbury</td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>33</td>
+<td><nobr><a href="/file.php?id=100406414">419 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=315632c33c4d5df0c3f60d52fb204f25"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/315632c33c4d5df0c3f60d52fb204f25?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/315632c33c4d5df0c3f60d52fb204f25?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/315632c33c4d5df0c3f60d52fb204f25?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/315632c33c4d5df0c3f60d52fb204f25?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406415<br>J. K. Rowling - Harry Potter et la chambre des secrets 2(Bloomsbury)" href="edition.php?id=144156690">Harry Potter et la chambre des secrets 2 <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 4920183</span></nobr>
+
+</td>
+<td>J. K. Rowling - Harry Potter- 2</td>
+<td>Bloomsbury</td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>29</td>
+<td><nobr><a href="/file.php?id=100406415">347 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=2b1c7f535e61b4713c4ca62711e44b1b"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/2b1c7f535e61b4713c4ca62711e44b1b?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/2b1c7f535e61b4713c4ca62711e44b1b?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/2b1c7f535e61b4713c4ca62711e44b1b?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/2b1c7f535e61b4713c4ca62711e44b1b?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 4</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406416<br>J. K. Rowling  - Harry Potter et la coupe de feu 4(Bloomsbury)" href="edition.php?id=144156691">Harry Potter et la coupe de feu 4 <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406416<br>J. K. Rowling  - Harry Potter et la coupe de feu 4(Bloomsbury)" href="edition.php?id=144156691"><i><font color="green"> 2070543587; 9782070543588</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 4920184</span></nobr>
+
+</td>
+<td>J. K. Rowling - Harry Potter- 4</td>
+<td>Bloomsbury</td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>49</td>
+<td><nobr><a href="/file.php?id=100406416">697 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=14f0f61d3bfedb46bdc451f521c562e5"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/14f0f61d3bfedb46bdc451f521c562e5?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/14f0f61d3bfedb46bdc451f521c562e5?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/14f0f61d3bfedb46bdc451f521c562e5?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/14f0f61d3bfedb46bdc451f521c562e5?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 7</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406420<br>J. K. Rowling - Harry Potter et les reliques de la mort 7(Bloomsbury)" href="edition.php?id=144156695">Harry Potter et les reliques de la mort 7 <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 4920188</span></nobr>
+
+</td>
+<td>J. K. Rowling - Harry Potter- 7</td>
+<td>Bloomsbury</td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>48</td>
+<td><nobr><a href="/file.php?id=100406420">813 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=4a647fd494ab0c272ef26f6147bf115d"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/4a647fd494ab0c272ef26f6147bf115d?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/4a647fd494ab0c272ef26f6147bf115d?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/4a647fd494ab0c272ef26f6147bf115d?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/4a647fd494ab0c272ef26f6147bf115d?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 6</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406421<br>J. K. Rowling  - Harry Potter et le prince de sang-mélé 6(Gallimard)" href="edition.php?id=144156696">Harry Potter et le prince de sang-mélé 6 <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-12/2023-07-16; ID: 100406421<br>J. K. Rowling  - Harry Potter et le prince de sang-mélé 6(Gallimard)" href="edition.php?id=144156696"><i><font color="green"> 2070572676; 9782070572670</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 4920189</span></nobr>
+
+</td>
+<td>J. K. Rowling - Harry Potter- 6</td>
+<td>Gallimard</td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>44</td>
+<td><nobr><a href="/file.php?id=100406421">683 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=675ff2ff0d137a63f2cf5ef35059b7a7"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/675ff2ff0d137a63f2cf5ef35059b7a7?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/675ff2ff0d137a63f2cf5ef35059b7a7?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/675ff2ff0d137a63f2cf5ef35059b7a7?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/675ff2ff0d137a63f2cf5ef35059b7a7?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry potter</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-13/2023-07-19; ID: 102019171<br>J. K. Rowling - Harry Potter and the Goblet of Fire 4(2002, Bloomsbury Harry Potter)" href="edition.php?id=145769855">Harry Potter and the Goblet of Fire: 4 4 <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2023-07-13/2023-07-19; ID: 102019171<br>J. K. Rowling - Harry Potter and the Goblet of Fire 4(2002, Bloomsbury Harry Potter)" href="edition.php?id=145769855"><i><font color="green"> 074756082X; 9780747560821</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 6100446</span></nobr>
+
+</td>
+<td>Rowling, J.K.</td>
+<td>Pottermore Publishing; Bloomsbury Harry Potter</td>
+<td><nobr>2002</nobr></td>
+<td>English</td>
+<td>0 / 1088</td>
+<td><nobr><a href="/file.php?id=102019171">2 MB</a></nobr></td>
+<td>azw3</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=08fc25ad42c8b7d408bd74bba74d118e"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/08fc25ad42c8b7d408bd74bba74d118e?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/08fc25ad42c8b7d408bd74bba74d118e?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/08fc25ad42c8b7d408bd74bba74d118e?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/08fc25ad42c8b7d408bd74bba74d118e?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 4;Harry Potter series fourth novel in the seven-part tale</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417190<br>Harry potter y el caliz de fueg - J. K. Rowling" href="edition.php?id=141385863">Harry Potter y el caliz de fuego: Harry Potter and the goblet of fire <i>1st Spanish language ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417190<br>Harry potter y el caliz de fueg - J. K. Rowling" href="edition.php?id=141385863"><i><font color="green"> 8478886451; 9788478886456</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414686</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K.;Garcia, Adolfo Munoz;Azofra, Nieves Martin</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 635 pages</td>
+<td><nobr><a href="/file.php?id=97417190">557 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=dddf33ccc8818e3e2fd7e8a557a1dbdc"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/dddf33ccc8818e3e2fd7e8a557a1dbdc?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/dddf33ccc8818e3e2fd7e8a557a1dbdc?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/dddf33ccc8818e3e2fd7e8a557a1dbdc?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/dddf33ccc8818e3e2fd7e8a557a1dbdc?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 4;Harry Potter series fourth novel in the seven-part tale</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417191<br>Harry Potter y el Caliz de Fuego - J. K. Rowling" href="edition.php?id=141385864">Harry Potter y el caliz de fuego: Harry Potter and the goblet of fire <i>1st Spanish language ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417191<br>Harry Potter y el Caliz de Fuego - J. K. Rowling" href="edition.php?id=141385864"><i><font color="green"> 8478886451; 9788478886456</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414687</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K.;Garcia, Adolfo Munoz;Azofra, Nieves Martin</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 635 pages</td>
+<td><nobr><a href="/file.php?id=97417191">1 MB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=aeb0ab1d7daf7ae397e93c70ee79907b"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/aeb0ab1d7daf7ae397e93c70ee79907b?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/aeb0ab1d7daf7ae397e93c70ee79907b?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/aeb0ab1d7daf7ae397e93c70ee79907b?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/aeb0ab1d7daf7ae397e93c70ee79907b?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 4;Harry Potter series fourth novel in the seven-part tale</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417192<br>Rowling, J. K. (2000). (Harry Potter 04) Harry Potter y el cáliz de fuego [1532]" href="edition.php?id=141385865">Harry Potter y el caliz de fuego: Harry Potter and the goblet of fire <i>1st Spanish language ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417192<br>Rowling, J. K. (2000). (Harry Potter 04) Harry Potter y el cáliz de fuego [1532]" href="edition.php?id=141385865"><i><font color="green"> 8478886451; 9788478886456</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414688</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K.;Garcia, Adolfo Munoz;Azofra, Nieves Martin</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 635 pages</td>
+<td><nobr><a href="/file.php?id=97417192">1 MB</a></nobr></td>
+<td>mobi</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=9376f22cb42f36c9dc6054086c1696c6"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/9376f22cb42f36c9dc6054086c1696c6?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/9376f22cb42f36c9dc6054086c1696c6?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/9376f22cb42f36c9dc6054086c1696c6?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/9376f22cb42f36c9dc6054086c1696c6?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 4;Harry Potter series fourth novel in the seven-part tale</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417193<br>Harry Potter y el Caliz De Fuego - Rowling, J. K_" href="edition.php?id=141385866">Harry Potter y el caliz de fuego: Harry Potter and the goblet of fire <i>1st Spanish language ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417193<br>Harry Potter y el Caliz De Fuego - Rowling, J. K_" href="edition.php?id=141385866"><i><font color="green"> 8478886451; 9788478886456</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414689</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K.;Garcia, Adolfo Munoz;Azofra, Nieves Martin</td>
+<td>SALAMANDRA</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 635 pages</td>
+<td><nobr><a href="/file.php?id=97417193">556 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=0d5a4857df7c4ed36d81dda5077564cf"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/0d5a4857df7c4ed36d81dda5077564cf?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/0d5a4857df7c4ed36d81dda5077564cf?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/0d5a4857df7c4ed36d81dda5077564cf?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/0d5a4857df7c4ed36d81dda5077564cf?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417171<br>Harry potter y la camara secret - J. K. Rowling" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417171<br>Harry potter y la camara secret - J. K. Rowling" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414667</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417171">364 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=9ad38b8266faf7aa7669a1491fe08559"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/9ad38b8266faf7aa7669a1491fe08559?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/9ad38b8266faf7aa7669a1491fe08559?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/9ad38b8266faf7aa7669a1491fe08559?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/9ad38b8266faf7aa7669a1491fe08559?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417172<br>Rowling, J. K. (1998). (Harry Potter 02) Harry Potter y la cámara secreta [1530]" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417172<br>Rowling, J. K. (1998). (Harry Potter 02) Harry Potter y la cámara secreta [1530]" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414668</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417172">599 kB</a></nobr></td>
+<td>mobi</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=f7c80f038b7289b7bc8ac8ce87437138"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/f7c80f038b7289b7bc8ac8ce87437138?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/f7c80f038b7289b7bc8ac8ce87437138?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/f7c80f038b7289b7bc8ac8ce87437138?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/f7c80f038b7289b7bc8ac8ce87437138?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417173<br>Harry Potter Y La Camara Secreta - J. K. Rowling" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417173<br>Harry Potter Y La Camara Secreta - J. K. Rowling" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414669</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417173">677 kB</a></nobr></td>
+<td>mobi</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=1d88ba793efadd26af0feb5a440a9a75"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/1d88ba793efadd26af0feb5a440a9a75?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/1d88ba793efadd26af0feb5a440a9a75?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/1d88ba793efadd26af0feb5a440a9a75?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/1d88ba793efadd26af0feb5a440a9a75?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417174<br>Harry Potter y la C_mara secreta II" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417174<br>Harry Potter y la C_mara secreta II" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414670</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417174">345 kB</a></nobr></td>
+<td>lit</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=1f63f7e30d1caf38108fdbb4bd5603e7"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/1f63f7e30d1caf38108fdbb4bd5603e7?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/1f63f7e30d1caf38108fdbb4bd5603e7?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/1f63f7e30d1caf38108fdbb4bd5603e7?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/1f63f7e30d1caf38108fdbb4bd5603e7?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417175<br>[20095]" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417175<br>[20095]" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414671</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417175">604 kB</a></nobr></td>
+<td>fb2</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=afc774c41b3dc8fbfad640619494648d"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/afc774c41b3dc8fbfad640619494648d?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/afc774c41b3dc8fbfad640619494648d?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/afc774c41b3dc8fbfad640619494648d?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/afc774c41b3dc8fbfad640619494648d?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417176<br>Harry Potter y la Camara Secreta - J. K. Rowling" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417176<br>Harry Potter y la Camara Secreta - J. K. Rowling" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414672</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417176">910 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=c7e86703fa255959c4aef7a39c321dd8"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/c7e86703fa255959c4aef7a39c321dd8?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/c7e86703fa255959c4aef7a39c321dd8?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/c7e86703fa255959c4aef7a39c321dd8?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/c7e86703fa255959c4aef7a39c321dd8?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417177<br>Harry Potter y la Camara Secreta - J. K. Rowling" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417177<br>Harry Potter y la Camara Secreta - J. K. Rowling" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414673</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417177">363 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=865ca437f54202dba2899e87656b1df4"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/865ca437f54202dba2899e87656b1df4?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/865ca437f54202dba2899e87656b1df4?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/865ca437f54202dba2899e87656b1df4?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/865ca437f54202dba2899e87656b1df4?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417178<br>Harry Potter y la Camara Secreta - Rowling, J. K_" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417178<br>Harry Potter y la Camara Secreta - Rowling, J. K_" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414674</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417178">363 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=89775f928f1e7385188dbc8465bf314c"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/89775f928f1e7385188dbc8465bf314c?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/89775f928f1e7385188dbc8465bf314c?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/89775f928f1e7385188dbc8465bf314c?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/89775f928f1e7385188dbc8465bf314c?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417179<br>Harry Potter y la Camara Secret - J. K. Rowling" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417179<br>Harry Potter y la Camara Secret - J. K. Rowling" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414675</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>0 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=97417179">315 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=5a0593d16c640c678a61da710beade7a"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/5a0593d16c640c678a61da710beade7a?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/5a0593d16c640c678a61da710beade7a?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/5a0593d16c640c678a61da710beade7a?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/5a0593d16c640c678a61da710beade7a?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 1;Serie Harry Potter 3</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417181<br>Harry Potter y el Prisionero de - J. K. Rowling" href="edition.php?id=141385854">Harry Potter y el Prisionero de Azkaban <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417181<br>Harry Potter y el Prisionero de - J. K. Rowling" href="edition.php?id=141385854"><i><font color="green"> 8478885196; 8478886419; 8478886443; 9788478885190; 9788478886418; 9788478886449</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414677</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 359 pages</td>
+<td><nobr><a href="/file.php?id=97417181">642 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=b00592689d00ee5b45cde0ebbeca26eb"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/b00592689d00ee5b45cde0ebbeca26eb?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/b00592689d00ee5b45cde0ebbeca26eb?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/b00592689d00ee5b45cde0ebbeca26eb?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/b00592689d00ee5b45cde0ebbeca26eb?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter series fourth novel in the seven-part tale</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417194<br>Harry Potter Y El Caliz De Fuego - J. K. Rowling" href="edition.php?id=141385867">Harry Potter y el caliz de fuego: Harry Potter and the goblet of fire <i>1st Spanish language ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417194<br>Harry Potter Y El Caliz De Fuego - J. K. Rowling" href="edition.php?id=141385867"><i><font color="green"> 8478886451; 9788478886456</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414690</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K.;Garcia, Adolfo Munoz;Azofra, Nieves Martin</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 635 pages</td>
+<td><nobr><a href="/file.php?id=97417194">889 kB</a></nobr></td>
+<td>mobi</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=727c181be39271837c5437b1725b1a2e"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/727c181be39271837c5437b1725b1a2e?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/727c181be39271837c5437b1725b1a2e?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/727c181be39271837c5437b1725b1a2e?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/727c181be39271837c5437b1725b1a2e?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter series fourth novel in the seven-part tale</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417195<br>Harry Potter y El Caliz De Fuego" href="edition.php?id=141385868">Harry Potter y el caliz de fuego: Harry Potter and the goblet of fire <i>1st Spanish language ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417195<br>Harry Potter y El Caliz De Fuego" href="edition.php?id=141385868"><i><font color="green"> 8478886451; 9788478886456</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414691</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K.;Garcia, Adolfo Munoz;Azofra, Nieves Martin</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 635 pages</td>
+<td><nobr><a href="/file.php?id=97417195">643 kB</a></nobr></td>
+<td>lit</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=9b75e2722c35aa8c4c489e6b471a6041"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/9b75e2722c35aa8c4c489e6b471a6041?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/9b75e2722c35aa8c4c489e6b471a6041?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/9b75e2722c35aa8c4c489e6b471a6041?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/9b75e2722c35aa8c4c489e6b471a6041?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Harry Potter 2</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2024-10-13/2024-10-16; ID: 106526917<br>J. K. Rowling - Harry Potter y La Cámara Secreta. (1999, Emecé)" href="edition.php?id=141385844">Harry Potter y La Cámara Secreta. <i>6 ed</i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2024-10-13/2024-10-16; ID: 106526917<br>J. K. Rowling - Harry Potter y La Cámara Secreta. (1999, Emecé)" href="edition.php?id=141385844"><i><font color="green"> 8478884955; 8498386950; 9788478884957; 9788498386950</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 7411942</span></nobr>
+
+</td>
+<td>Potter, Harry (Caracter ficticio);Potter, Harry (Fictitious character);Rowling, J. K</td>
+<td>Emecé Editores España, S.A.</td>
+<td><nobr>1996</nobr></td>
+<td>Spanish</td>
+<td>241 / 286 pages ; 23 cm</td>
+<td><nobr><a href="/file.php?id=106526917">873 kB</a></nobr></td>
+<td>pdf</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=4b387045c4040a601c3bb95eb9a98a57"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/4b387045c4040a601c3bb95eb9a98a57?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/4b387045c4040a601c3bb95eb9a98a57?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/4b387045c4040a601c3bb95eb9a98a57?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/4b387045c4040a601c3bb95eb9a98a57?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr><tr>
+
+<td><b>Serie Harry Potter 3</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417182<br>Harry potter y el prisionero de - J. K. Rowling" href="edition.php?id=141385855">Harry potter y el prisionero de azkaban <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2022-03-08/2022-03-08; ID: 97417182<br>Harry potter y el prisionero de - J. K. Rowling" href="edition.php?id=141385855"><i><font color="green"> 8478885196; 8478886419; 8478886443; 9788478885190; 9788478886418; 9788478886449</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Book">b</a></span> 
+<span class="badge badge-secondary"">f 3414678</span></nobr>
+
+</td>
+<td>Potter, Harry;Rowling, J. K</td>
+<td>Salamandra</td>
+<td><nobr>2000</nobr></td>
+<td>Spanish</td>
+<td>0 / 359 pages</td>
+<td><nobr><a href="/file.php?id=97417182">389 kB</a></nobr></td>
+<td>epub</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/ads.php?md5=b549dfdf5c556f540894b88d2edf479e"><span class="badge badge-primary">1</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Randombook" href="https://randombook.org/book/b549dfdf5c556f540894b88d2edf479e?utm_source=libgen.li"><span class="badge badge-primary">2</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/b549dfdf5c556f540894b88d2edf479e?r=Ax2w6jC"><span class="badge badge-primary">3</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.pw" href="https://libgen.pw/book/b549dfdf5c556f540894b88d2edf479e?utm_source=libgen.li"><span class="badge badge-primary">4</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen.me" href="https://libgen.me/book/b549dfdf5c556f540894b88d2edf479e?utm_source=libgen.li"><span class="badge badge-primary">5</span></a> </td>
+</tr></tbody></table><table>
+  <tr>
+    <td><script>
+	atOptions = {
+		'key' : '80ff16b446cdd16fda9f69edcec465d4',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script src="https://bauval.org/22/80ff16b446cdd16fda9f69edcec465d4"></script>
+
+</td>
+    <td><script>
+	atOptions = {
+		'key' : '80ff16b446cdd16fda9f69edcec465d4',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script src="https://bauval.org/22/80ff16b446cdd16fda9f69edcec465d4"></script>
+
+</td>
+  </tr> 
+</table><div style="text-align: center;" class="paginator" id="paginator_example_bottom"></div><script type="text/javascript">paginator_example_bottom = new Paginator("paginator_example_bottom", 80, 25, 1, "/index.php?req=harry+potter&res=10&curtab=f&order=&ordermode=desc&filesuns=all&page=" );</script><div class="modal fade text-dark" id="googlemodemodal" tabindex="-1" aria-labelledby="googlemodemodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="googlemodemodalLabel">Google mode</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+By default, the search searches for a set of marked fields containing all the words specified in the query in no particular order<br>
+Advanced search mode (Google mode), allows you to set more precise search terms:<br>
+- Quotes: "" - search exactly for the phrase as it is written in the database<br>
+- Mask: * (min 3 chars)- search by part of a word<br>
+- Excluding words: - (minus) - does not display records containing this word, also, these conditions can be combined.<br>
+Example:<br>
+"Physics and Chemistry" Basi * -technology<br>
+means the title of the book contains the exact phrase "Physics and Chemistry", contains the word starting with Basi and does not contain the word technology.<br>
+You can also search for a specific field or view mode that is not displayed for selection in the interface, syntax: field_name:value<br>
+List of add. fields:<br>
+For the Files tab:<br>
+<i>md5</i><br>
+<i>tth</i><br>
+<i>sha1</i><br>
+<i>sha256</i><br>
+<i>crc32</i><br>
+<i>edonkey</i><br>
+<i>doi</i><br>
+
+View modes:<br>
+<i>mode:last</i> - last added entries (for a given object - series, authors, editions, etc.)<br>
+<br>
+<i>fmode:last</i> - last added files (for the given repository)<br>
+<br>
+Add. fields for object "editions" and "files":<br>
+<i>issuevolume</i> - periodical volume<br>
+<i>issuesid</i> - serial ID of the periodical<br>
+<i>issuenumber</i> - the number (within the volume) of the periodical<br>
+<i>issuetnumber</i> is the gross number of the periodical<br>
+<i>issueynumber</i> - intra-annual issue of the periodical<br>
+<i>year</i> - year<br>
+<i>publisherid</i> - Publisher ID<br>
+<i>authorid</i> - Author's ID<br>
+<i>lang</i> - three-letter language code (ISO 639)<br>
+<i>fsize</i> - filesize (MBytes), for example: fsize&gt;10, fsize&lt;20, fsize=15<br>
+<i>ext</i> - File extenstion <br>
+<i>booktopicid</i> - ID of the classifier for books<br>
+<i>tags</i> - Теги (издание, работы, серия)<br>
+<br>
+Add. fields for object "series"<br>
+<i>comtopicid</i> - ID of the classifier for comics<br>
+<i>smtopicid</i> - ID of the classifier for scientific journals<br>
+<i>magtopicid</i> - ID of the classifier for magazines<br>
+<i>issn</i> - ISSN
+
+      </div>
+    </div>
+  </div>
+</div><nav class="navbar sticky-bottom navbar-expand-sm navbar-dark bg-secondary">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#dmcamodal">DMCA</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutmodal">ABOUT</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#donatemodal" >DONATE</a>
+      </li>
+	
+    </ul>
+	<span class="navbar-text">Users online 4309</span>
+  </div>
+</nav>
+
+<!-- Modal Donate -->
+<div class="modal fade text-dark" id="donatemodal" tabindex="-1" aria-labelledby="donatemodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donatemodalLabel">Donate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a href="bitcoin://bc1qlv9lwa5vncm2jjrxyhddfcvu0z3u5vn0s9672r">Bitcoin</a>
+	<br>
+        <a href="monero:48WhyKv4D9x53SyDFNYuMsHsDzuHXEcht4mWoFtXtE3k4KZ3A7goi3CQWBQQZ3A8PSK7CpwnAFKLnfGiZTAbEpcaCQCghvN">Monero</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal About -->
+<div class="modal fade text-dark" id="aboutmodal" tabindex="-1" aria-labelledby="aboutmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aboutmodalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+<div id="about">
+The Library Genesis aggregator is a community aiming at collecting and cataloging items descriptions for the most part of scientific, 
+scientific and technical directions, as well as file metadata. In addition to the descriptions, 
+the aggregator contains only links to third-party resources hosted by users. 
+All information posted on the website is collected from publicly available public Internet resources and is intended solely for informational purposes.  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal DMCA -->
+<div class="modal fade text-dark" id="dmcamodal" tabindex="-1" aria-labelledby="dmcamodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dmcamodalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<div id="dmca">
+Library Genesis - aggregator items is a website that collects and organizes online items from users. 
+Item aggregation is done for fact-finding purposes, and website Library Genesis respects the rights of copyright holders and respect dcma.
+
+     Removing Content From Library Genesis / DMCA Policy
+     Library Genesis respects the intellectual property of others.
+</div>
+
+    <div class="dmca">
+     If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible on this site, you may notify our copyright agent, as set forth in the Digital Millennium Copyright Act of 1998 (DMCA). For your complaint to be valid under the DMCA, you must provide the following information when providing notice of the claimed copyright infringement:
+</div>
+    <div class="dmca">
+     * A physical or electronic signature of a person authorized to act on behalf of the copyright owner Identification of the copyrighted work claimed to have been infringed <br />
+     * Identification of the material that is claimed to be infringing or to be the subject of the infringing activity and that is to be removed <br />
+     * Information reasonably sufficient to permit the service provider to contact the complaining party, such as an address, telephone number, and, if available, an electronic mail address <br />
+     * A statement that the complaining party "in good faith believes that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or law" <br />
+     * A statement that the "information in the notification is accurate", and "under penalty of perjury, the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed" <br />
+     The above information must be submitted as a written, faxed or emailed notification to the following Designated Agent: ianzlib@protonmail.com. Appeals will be reviewed within 72 hours.</div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.5/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<script src="/js/form-validation.js"></script>
+	<script>
+$('[data-toggle="tooltip"]').tooltip();
+$('.btn-tooltip-bottom').tooltip({
+    placement: 'bottom'
+});
+</script>
+
+</body>
+</html>

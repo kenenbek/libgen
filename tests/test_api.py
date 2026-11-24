@@ -6,7 +6,12 @@ from pathlib import Path
 import pytest
 
 from libgen_service.api import LibgenAPI, cover_bucket
-from libgen_service.errors import DownloadError, InvalidInput, NotFound
+from libgen_service.errors import (
+    DownloadError,
+    FileUnavailable,
+    InvalidInput,
+    NotFound,
+)
 from tests.conftest import DOWNLOAD_PAYLOAD, FakeClient
 
 HARRY_MD5 = "184c16eae281bf2ebea72eb6d7aa6f6d"
@@ -151,6 +156,10 @@ def test_download_verifies_md5(api: LibgenAPI, payload_md5: str, tmp_path: Path)
     assert path.read_bytes() == DOWNLOAD_PAYLOAD
     assert result["verified"] is True
     assert hashlib.md5(path.read_bytes()).hexdigest() == payload_md5
+    stats = api.download_stats()
+    assert stats["download_attempts"] == 1
+    assert stats["downloads_ok"] == 1
+    assert stats["dead_file_rate"] == 0.0
 
 
 def test_download_rejects_corrupted_file(tmp_path: Path):
@@ -175,6 +184,62 @@ def test_download_rejects_corrupted_file(tmp_path: Path):
         assert leftovers == []
     finally:
         api.close()
+
+
+def test_dead_file_is_not_retried(api: LibgenAPI, fake_client: FakeClient):
+    fake_client.missing_file = True
+    with pytest.raises(FileUnavailable):
+        with api.open_download(HARRY_MD5):
+            pass
+    ads_calls = [r for r in fake_client.requests if r[1].startswith("/ads.php")]
+    get_calls = [r for r in fake_client.requests if "get.php" in r[1]]
+    assert len(ads_calls) == 1
+    assert len(get_calls) == 1
+    stats = api.download_stats()
+    assert stats["download_attempts"] == 1
+    assert stats["dead_files"] == 1
+    assert stats["dead_file_rate"] == 1.0
+
+
+def test_missing_file_does_not_poison_mirror(tmp_path: Path):
+    from libgen_service.config import Settings
+    from libgen_service.http import HttpClient
+
+    class Response:
+        status_code = 500
+        text = "<h1>Error</h1><p>File not found in DB</p>"
+        headers = {"Content-Type": "text/html"}
+
+        def close(self) -> None:
+            pass
+
+    class Session:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def request(self, *args, **kwargs):
+            self.calls += 1
+            return Response()
+
+        def close(self) -> None:
+            pass
+
+    client = HttpClient(
+        Settings(
+            mirrors=("https://libgen.li",),
+            cache_dir=tmp_path,
+            min_interval=0.0,
+        )
+    )
+    client.session = Session()
+    try:
+        with pytest.raises(FileUnavailable):
+            client.get("/get.php?md5=" + "a" * 32)
+        state = client.mirrors()[0]
+        assert state["failures"] == 0
+        assert state["healthy"] is True
+    finally:
+        client.close()
 
 
 def test_cover_bucket_matches_real_paths():

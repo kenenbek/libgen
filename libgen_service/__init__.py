@@ -13,6 +13,7 @@ from .api import LibgenAPI, DownloadStream
 from .config import Settings
 from .errors import (
     DownloadError,
+    FileUnavailable,
     InvalidInput,
     LibgenError,
     LibgenUnavailable,
@@ -31,6 +32,7 @@ __all__ = [
     "LibgenUnavailable",
     "NotFound",
     "DownloadError",
+    "FileUnavailable",
     "InvalidInput",
 ]
 

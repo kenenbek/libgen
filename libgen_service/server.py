@@ -6,26 +6,30 @@ it, so advertising interstitials and redirect chains never reach the client.
 
 from __future__ import annotations
 
+import html
 import json
 import re
 import threading
 import time
 import traceback
 import webbrowser
+from contextlib import contextmanager
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
-from urllib.parse import parse_qs, unquote, urlparse
+from typing import Any, Iterator
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
-from .api import LibgenAPI
+from .api import DownloadStream, LibgenAPI
 from .errors import (
     DownloadError,
+    FileUnavailable,
     InvalidInput,
     LibgenError,
     LibgenUnavailable,
     NotFound,
 )
+from .infra import InfraMonitor, build_download_chain
 
 WEB_DIR = Path(__file__).resolve().parent / "web"
 INDEX_FILE = WEB_DIR / "index.html"
@@ -35,9 +39,24 @@ class LibgenServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
 
-    def __init__(self, address: tuple[str, int], api: LibgenAPI) -> None:
+    def __init__(
+        self,
+        address: tuple[str, int],
+        api: LibgenAPI,
+        infra: InfraMonitor | None = None,
+    ) -> None:
         super().__init__(address, LibgenRequestHandler)
         self.api = api
+        self.infra = infra
+
+    def server_close(self) -> None:
+        monitor = self.infra
+        if monitor is not None:
+            try:
+                monitor.stop()
+            except Exception:  # noqa: BLE001 - shutdown must stay clean
+                pass
+        super().server_close()
 
 
 class LibgenRequestHandler(BaseHTTPRequestHandler):
@@ -89,6 +108,8 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
             return self._send_bytes(b"", "image/x-icon", HTTPStatus.NO_CONTENT)
         if path == "/api/health":
             return self._send_json(self.server.api.health())
+        if path == "/api/infra":
+            return self._infra(query)
         if path == "/api/mirrors":
             probe = self._flag(query, "probe")
             return self._send_json({"mirrors": self.server.api.mirrors(probe=probe)})
@@ -138,6 +159,24 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
         )
 
     # --------------------------------------------------------------- endpoints
+    def _infra(self, query: dict[str, list[str]]) -> int:
+        monitor = self.server.infra
+        if monitor is None:
+            monitor = InfraMonitor(
+                self.server.api.settings,
+                self.server.api.cache,
+                client=self.server.api.client,
+            )
+            self.server.infra = monitor
+        report = monitor.report(
+            refresh=self._flag(query, "refresh"),
+            dumps=self._flag(query, "dumps"),
+        )
+        stats = self.server.api.download_stats()
+        report["stats"] = stats
+        report["chain"] = build_download_chain(self.server.api.settings, stats)
+        return self._send_json(report)
+
     def _search(self, query: dict[str, list[str]]) -> int:
         q = (self._one(query, "q") or "").strip()
         if not q:
@@ -179,11 +218,10 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
     def _download(self, md5: str) -> int:
         headers_sent = False
         try:
-            with self.server.api.open_download(md5) as stream:
+            with self._open_with_fallback(md5) as stream:
                 filename = stream.filename
                 ascii_name = filename.encode("ascii", "replace").decode("ascii")
                 ascii_name = ascii_name.replace('"', "_")
-                from urllib.parse import quote
 
                 disposition = (
                     f'attachment; filename="{ascii_name}"; '
@@ -208,17 +246,141 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
         except (BrokenPipeError, ConnectionResetError):
             self.close_connection = True
             return 499
-        except (InvalidInput, NotFound):
-            # Let the dispatcher map these to 400/404.
+        except FileUnavailable:
             if headers_sent:
                 self.close_connection = True
                 return 500
-            raise
+            return self._download_error_page(
+                md5,
+                HTTPStatus.NOT_FOUND,
+                "Файл недоступен",
+                "Запись есть в каталоге, но самого файла нет на зеркалах "
+                "Libgen. Попробуйте другое издание или другой формат.",
+            )
+        except (InvalidInput, NotFound) as exc:
+            if headers_sent:
+                self.close_connection = True
+                return 500
+            if isinstance(exc, InvalidInput):
+                # Let the dispatcher map this to a JSON 400 response.
+                raise
+            return self._download_error_page(
+                md5,
+                HTTPStatus.NOT_FOUND,
+                "Файл не найден",
+                "Этого файла нет в каталоге. Возможно, ссылка устарела.",
+            )
         except LibgenError as exc:
             if headers_sent:
                 self.close_connection = True
                 return 500
-            return self._send_json({"error": str(exc)}, HTTPStatus.BAD_GATEWAY)
+            return self._download_error_page(
+                md5,
+                HTTPStatus.BAD_GATEWAY,
+                "Не удалось скачать файл",
+                "Зеркала Libgen не ответили. Попробуйте ещё раз через минуту.",
+                detail=str(exc),
+            )
+
+    @contextmanager
+    def _open_with_fallback(self, md5: str) -> Iterator[DownloadStream]:
+        """Open a file, falling back to another file of the same edition.
+
+        Libgen keeps metadata even when the underlying file is gone.  When
+        that happens we try the other copies of the same book before giving
+        up, so a dead MD5 does not fail the whole download.
+        """
+        try:
+            with self.server.api.open_download(md5) as stream:
+                yield stream
+            return
+        except FileUnavailable:
+            pass
+        for candidate in self._sibling_md5s(md5):
+            try:
+                with self.server.api.open_download(candidate) as stream:
+                    self.server.api.note_sibling_fallback(md5)
+                    yield stream
+                return
+            except FileUnavailable:
+                continue
+        raise FileUnavailable("No copy of this file is available on Libgen")
+
+    def _sibling_md5s(self, md5: str) -> list[str]:
+        try:
+            info = self.server.api.file(md5)
+        except LibgenError:
+            return []
+        seen: list[str] = []
+        for edition in info.get("editions") or []:
+            for item in edition.get("files") or []:
+                candidate = str(item.get("md5") or "").lower()
+                if candidate and candidate != md5 and candidate not in seen:
+                    seen.append(candidate)
+        return seen
+
+    def _download_error_page(
+        self,
+        md5: str,
+        status: int,
+        title: str,
+        message: str,
+        *,
+        detail: str | None = None,
+    ) -> int:
+        detail_html = (
+            f'<pre class="detail">{html.escape(detail)}</pre>' if detail else ""
+        )
+        body = f"""<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(title)} — Libgen</title>
+<style>
+  :root {{ --ink:#111; --paper:#fff; --red:#e1000f; }}
+  * {{ box-sizing:border-box; }}
+  body {{ margin:0; min-height:100vh; display:grid; place-items:center;
+    background:var(--paper); color:var(--ink); padding:24px;
+    font:16px/1.5 Helvetica,Arial,sans-serif; }}
+  main {{ width:100%; max-width:640px; border-top:2px solid var(--ink);
+    padding-top:24px; }}
+  .eyebrow {{ margin:0 0 28px; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:#666; }}
+  .eyebrow b {{ color:var(--red); font-weight:700; }}
+  h1 {{ margin:0 0 16px; font-size:clamp(32px,7vw,56px); line-height:.95;
+    letter-spacing:-.03em; font-weight:700; }}
+  .lead {{ margin:0 0 24px; max-width:46ch; color:#333; }}
+  .detail {{ margin:0 0 24px; padding:12px; background:#f4f4f4;
+    border-left:3px solid var(--red); font:12px/1.5 ui-monospace,monospace;
+    white-space:pre-wrap; word-break:break-word; color:#444; }}
+  .actions {{ display:flex; flex-wrap:wrap; gap:12px; margin:0; }}
+  .actions a {{ display:inline-block; padding:11px 18px; border:1px solid var(--ink);
+    color:var(--ink); text-decoration:none; font-size:12px; letter-spacing:.08em;
+    text-transform:uppercase; }}
+  .actions a.primary {{ background:var(--ink); color:var(--paper); }}
+  .actions a:hover {{ background:var(--red); border-color:var(--red); color:#fff; }}
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">libgen <b>/</b> download</p>
+  <h1>{html.escape(title)}</h1>
+  <p class="lead">{html.escape(message)}</p>
+  {detail_html}
+  <p class="actions">
+    <a class="primary" href="/?q={quote(md5)}">Искать это издание</a>
+    <a href="/">Вернуться к поиску</a>
+  </p>
+</main>
+</body>
+</html>"""
+        return self._send_bytes(
+            body.encode("utf-8"),
+            "text/html; charset=utf-8",
+            status,
+            cache="no-store",
+        )
 
     # ------------------------------------------------------------------ output
     def _send_json(self, payload: Any, status: int = HTTPStatus.OK) -> int:
@@ -290,7 +452,9 @@ def serve(
     open_browser: bool = False,
 ) -> None:
     api = api or LibgenAPI()
-    server = LibgenServer((host, port), api)
+    monitor = InfraMonitor(api.settings, api.cache, client=api.client)
+    server = LibgenServer((host, port), api, infra=monitor)
+    monitor.start()
     actual_host, actual_port = server.server_address[:2]
     url = f"http://{actual_host}:{actual_port}/"
     print(f"Libgen service is running at {url}")

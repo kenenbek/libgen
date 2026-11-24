@@ -9,6 +9,7 @@ import pytest
 from libgen_service.api import LibgenAPI
 from libgen_service.cache import TTLCache
 from libgen_service.config import Settings
+from libgen_service.errors import FileUnavailable
 
 FIXTURES = Path(__file__).parent / "fixtures"
 DOWNLOAD_PAYLOAD = (b"%PDF-1.4\n" + b"fake book content\n" * 200) + b"%%EOF\n"
@@ -43,9 +44,16 @@ class FakeResponse:
 class FakeClient:
     """Drop-in replacement for HttpClient backed by real captured fixtures."""
 
-    def __init__(self, *, payload: bytes = DOWNLOAD_PAYLOAD, corrupt: bool = False) -> None:
+    def __init__(
+        self,
+        *,
+        payload: bytes = DOWNLOAD_PAYLOAD,
+        corrupt: bool = False,
+        missing_file: bool = False,
+    ) -> None:
         self.payload = payload
         self.corrupt = corrupt
+        self.missing_file = missing_file
         self.requests: list[tuple[str, str, dict]] = []
 
     def _json(self, name: str) -> dict:
@@ -92,6 +100,13 @@ class FakeClient:
             )
             return FakeResponse(text=html, url=f"https://libgen.li/ads.php?md5={md5}")
         if "get.php" in path:
+            if self.missing_file:
+                return FakeResponse(
+                    text="<h1>Error</h1><p>File not found in DB</p>",
+                    url=path,
+                    status_code=500,
+                    headers={"Content-Type": "text/html; charset=UTF-8"},
+                )
             payload = b"corrupted bytes" if self.corrupt else self.payload
             return FakeResponse(
                 content=payload,
@@ -134,7 +149,14 @@ class FakeClient:
 
     def request(self, method: str, path: str, **kwargs):
         if method.upper() == "GET":
-            return self.get(path, **kwargs)
+            response = self.get(path, **kwargs)
+            if self.missing_file and "get.php" in path:
+                response.close()
+                raise FileUnavailable(
+                    "The file is missing from Libgen storage "
+                    "(File not found in DB)"
+                )
+            return response
         raise AssertionError(f"Unexpected {method} {path}")
 
     def mirrors(self):

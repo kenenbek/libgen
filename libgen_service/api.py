@@ -20,12 +20,13 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterator
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from .cache import TTLCache
 from .config import Settings
 from .errors import (
     DownloadError,
+    FileUnavailable,
     InvalidInput,
     LibgenError,
     LibgenUnavailable,
@@ -103,6 +104,75 @@ class LibgenAPI:
         )
         self._locks_guard = threading.Lock()
         self._locks: dict[str, threading.Lock] = defaultdict(threading.Lock)
+        self._stats_lock = threading.Lock()
+        self._stats: dict[str, Any] = {
+            "since": time.time(),
+            "download_attempts": 0,
+            "downloads_ok": 0,
+            "dead_files": 0,
+            "sibling_fallbacks": 0,
+            "cdn_hosts": {},
+            "last_cdn": None,
+            "last_error": None,
+        }
+        self._load_stats()
+
+    # ---------------------------------------------------------------- telemetry
+    def _load_stats(self) -> None:
+        stored = self.cache.get("stats:downloads")
+        if not isinstance(stored, dict):
+            return
+        for key, value in stored.items():
+            if key in self._stats:
+                self._stats[key] = value
+
+    def _save_stats(self) -> None:
+        try:
+            self.cache.set("stats:downloads", dict(self._stats), ttl=0)
+        except Exception:  # noqa: BLE001 - telemetry must never break downloads
+            pass
+
+    def _note(self, key: str, amount: int = 1) -> None:
+        with self._stats_lock:
+            self._stats[key] = int(self._stats.get(key) or 0) + amount
+            self._save_stats()
+
+    def note_dead_file(self, md5: str) -> None:
+        self._note("dead_files")
+        with self._stats_lock:
+            self._stats["last_error"] = f"file missing: {md5}"
+            self._save_stats()
+
+    def note_sibling_fallback(self, md5: str) -> None:
+        self._note("sibling_fallbacks")
+        with self._stats_lock:
+            self._stats["last_error"] = f"fell back from {md5}"
+            self._save_stats()
+
+    def note_download_ok(self, md5: str, cdn_host: str | None = None) -> None:
+        self._note("downloads_ok")
+        if cdn_host:
+            with self._stats_lock:
+                hosts = self._stats.setdefault("cdn_hosts", {})
+                hosts[cdn_host] = int(hosts.get(cdn_host) or 0) + 1
+                self._stats["last_cdn"] = cdn_host
+                self._save_stats()
+
+    def note_download_error(self, message: str) -> None:
+        with self._stats_lock:
+            self._stats["last_error"] = message[:300]
+            self._save_stats()
+
+    def download_stats(self) -> dict[str, Any]:
+        with self._stats_lock:
+            data = dict(self._stats)
+            data["cdn_hosts"] = dict(self._stats.get("cdn_hosts") or {})
+        attempts = int(data.get("download_attempts") or 0)
+        dead = int(data.get("dead_files") or 0)
+        ok = int(data.get("downloads_ok") or 0)
+        data["dead_file_rate"] = round(dead / attempts, 4) if attempts else 0.0
+        data["success_rate"] = round(ok / attempts, 4) if attempts else 0.0
+        return data
 
     # ------------------------------------------------------------------ utils
     def _lock_for(self, key: str) -> threading.Lock:
@@ -763,10 +833,17 @@ class LibgenAPI:
     @contextmanager
     def open_download(self, md5: str) -> Iterator[DownloadStream]:
         md5 = self._validate_md5(md5)
+        self._note("download_attempts")
         errors: list[str] = []
         for attempt in range(3):
             try:
                 info = self.resolve(md5, force=attempt > 0)
+            except FileUnavailable:
+                self.note_dead_file(md5)
+                raise
+            except LibgenUnavailable as exc:
+                errors.extend(exc.errors or [str(exc)])
+                continue
             except LibgenError as exc:
                 errors.append(str(exc))
                 continue
@@ -782,6 +859,14 @@ class LibgenAPI:
                     allow_redirects=True,
                     timeout=max(60.0, self.settings.timeout),
                 )
+            except FileUnavailable:
+                # No mirror has this file; retrying only wastes time.
+                self.note_dead_file(md5)
+                raise
+            except LibgenUnavailable as exc:
+                errors.extend(exc.errors or [str(exc)])
+                self.cache.delete(f"dl:{md5}")
+                continue
             except LibgenError as exc:
                 errors.append(str(exc))
                 self.cache.delete(f"dl:{md5}")
@@ -789,7 +874,18 @@ class LibgenAPI:
 
             content_type = (response.headers.get("Content-Type") or "").lower()
             if "text/html" in content_type or response.status_code >= 400:
+                # Some CDN nodes answer with an HTML error page even on 200.
+                try:
+                    body = response.text[:4000]
+                except Exception:  # noqa: BLE001
+                    body = ""
                 response.close()
+                if "file not found in db" in body.lower():
+                    self.note_dead_file(md5)
+                    raise FileUnavailable(
+                        "The file is missing from Libgen storage "
+                        "(File not found in DB)"
+                    )
                 errors.append(f"mirror returned {content_type or response.status_code}")
                 self.cache.delete(f"dl:{md5}")
                 continue
@@ -810,14 +906,19 @@ class LibgenAPI:
                 content_type=content_type or "application/octet-stream",
                 _response=response,
             )
+            cdn_host = urlparse(getattr(response, "url", "") or "").hostname
+            self.note_download_ok(md5, cdn_host)
             try:
                 yield stream
             finally:
                 response.close()
             return
-        raise DownloadError(
-            "Could not download the file. " + ("; ".join(errors[-3:]) or "unknown error")
+        unique = list(dict.fromkeys(errors))[-4:]
+        message = "Could not download the file. " + (
+            "; ".join(unique) or "unknown error"
         )
+        self.note_download_error(message)
+        raise DownloadError(message)
 
     def _fallback_filename(self, md5: str) -> str:
         try:

@@ -6,7 +6,7 @@
 <title>Libgen — поиск книг</title>
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='47' font-family='monospace' font-size='38' font-weight='700' fill='%2339ff14' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
-<script>try{var p=new URLSearchParams(location.search);var s=p.get("style")||localStorage.getItem("libgen-style");if(s==="moma"||s==="hack")document.documentElement.dataset.style=s;var u=p.get("theme");var t=u||localStorage.getItem("libgen-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script>try{var p=new URLSearchParams(location.search);var s=p.get("style");if(s==="moma"||s==="hack"){document.documentElement.dataset.style=s;localStorage.setItem("libgen-style",s);}else{var ls=localStorage.getItem("libgen-style");if(ls==="moma"||ls==="hack")document.documentElement.dataset.style=ls;}var u=p.get("theme");if(u){document.documentElement.dataset.theme=u;localStorage.setItem("libgen-theme",u);}else{var lt=localStorage.getItem("libgen-theme");if(lt)document.documentElement.dataset.theme=lt;}}catch(e){}</script>
 <style>
   :root {
     color-scheme: light;
@@ -94,6 +94,15 @@
   .status-square { width: 8px; height: 8px; background: var(--muted); flex: none; }
   .status-square.ok { background: var(--green); }
   .status-square.bad { background: var(--red); }
+  .infra-open {
+    display: inline-flex; align-items: center; gap: 7px; flex: none;
+    height: 36px; padding: 0 10px; border: 1px solid var(--rule);
+    background: transparent; color: var(--muted);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .infra-open:hover { border-color: var(--ink); color: var(--ink); }
+  .infra-open svg { flex: none; }
   .style-switch { display: inline-flex; border: 1px solid var(--rule); flex: none; }
   .style-switch button {
     border: 0; background: transparent; color: var(--muted);
@@ -471,6 +480,111 @@
   details.toc summary::before { content: "[+]"; margin-right: 8px; color: var(--green); font-weight: 400; }
   details.toc[open] summary::before { content: "[-]"; }
 
+  /* -------------------------------------------------------------- infra */
+  #infra { width: min(1080px, calc(100% - 24px)); }
+  .infra-body { padding: 24px 26px 28px; }
+  .infra-top {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .infra-top h2 {
+    margin: 0; font-size: clamp(26px, 4vw, 40px); line-height: 1;
+    letter-spacing: -.04em; font-weight: 800;
+  }
+  .infra-stamp {
+    font-family: var(--mono); font-size: 9.5px; color: var(--muted);
+    margin-left: auto;
+  }
+  .infra-stats {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-strong);
+    border-left: 1px solid var(--rule-strong);
+    margin-bottom: 26px;
+  }
+  .infra-stat {
+    padding: 12px 14px; border-right: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .infra-stat b {
+    display: block; font-size: clamp(22px, 3vw, 32px); line-height: 1;
+    letter-spacing: -.03em; margin-bottom: 6px;
+  }
+  .infra-stat span {
+    display: block; font-family: var(--mono); font-size: 9px;
+    color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+  }
+  .infra-section { margin-top: 28px; }
+  .infra-section-title {
+    display: flex; align-items: baseline; gap: 10px;
+    margin: 0 0 12px; padding-top: 14px; border-top: 2px solid var(--rule-strong);
+    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .infra-section-title .count { color: var(--green); }
+  .infra-scroll { overflow-x: auto; }
+  .infra-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: 10.5px;
+  }
+  .infra-table th {
+    text-align: left; padding: 8px 10px; white-space: nowrap;
+    border-bottom: 1px solid var(--rule-strong);
+    color: var(--muted); font-size: 8.5px; text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .infra-table td {
+    padding: 10px; border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .infra-table tr:last-child td { border-bottom: 0; }
+  .infra-host { font-weight: 700; white-space: nowrap; }
+  .infra-sub { display: block; color: var(--muted); font-size: 9px; margin-top: 3px; }
+  .infra-num { white-space: nowrap; }
+  .infra-pill {
+    display: inline-block; padding: 2px 6px; border: 1px solid var(--rule);
+    font-size: 8px; letter-spacing: .07em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .infra-pill.cf { border-color: var(--green); color: var(--green); }
+  .infra-pill.warn { border-color: var(--red); color: var(--red); }
+  .infra-pill.ok { border-color: var(--green); color: var(--green); }
+  .infra-pill.bad { border-color: var(--red); color: var(--red); }
+  .infra-ok { color: var(--green); }
+  .infra-bad { color: var(--red); }
+  .infra-chain { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+  .infra-step {
+    flex: 1 1 150px; min-width: 140px; padding: 10px 12px;
+    border: 1px solid var(--rule);
+  }
+  .infra-step b {
+    display: block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: .07em; margin-bottom: 4px;
+  }
+  .infra-step span {
+    display: block; font-family: var(--mono); font-size: 9px;
+    color: var(--muted); line-height: 1.5; word-break: break-word;
+  }
+  .infra-arrow { align-self: center; color: var(--muted); font-family: var(--mono); }
+  .infra-warnings { list-style: none; margin: 0; padding: 0; }
+  .infra-warnings li {
+    display: flex; gap: 12px; align-items: baseline;
+    padding: 8px 0; border-bottom: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 10px;
+  }
+  .infra-warnings li:last-child { border-bottom: 0; }
+  .infra-level {
+    flex: none; min-width: 64px; font-size: 8px; letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .infra-level.error, .infra-level.critical { color: var(--red); }
+  .infra-level.warning { color: var(--ink); }
+  .infra-level.info { color: var(--muted); }
+  .infra-empty {
+    padding: 18px 0; font-family: var(--mono); font-size: 10px;
+    color: var(--muted);
+  }
+  .infra-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
   /* ------------------------------------------------------------- toast */
   .toast {
     position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 10px);
@@ -506,6 +620,9 @@
     .card-actions { grid-column: 3 / -1; flex-direction: row; align-items: center; justify-content: flex-start; }
     .footer-grid { grid-template-columns: 1fr; }
     .footer-grid > :last-child { text-align: left; }
+    .infra-open { width: 36px; height: 36px; padding: 0; justify-content: center; }
+    .infra-open .infra-text { display: none; }
+    .infra-stats { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 620px) {
     .site-header { gap: 10px; }
@@ -527,6 +644,10 @@
     .kv { grid-template-columns: 1fr 1fr; }
     .dialog-body { padding: 18px; }
     .terminal { box-shadow: 4px 4px 0 var(--green); }
+    .infra-body { padding: 18px; }
+    .infra-stamp { margin-left: 0; width: 100%; }
+    .infra-chain .infra-arrow { display: none; }
+    .infra-table { font-size: 9.5px; }
   }
   /* ------------------------------------------------------- style swap */
   .m { display: none !important; }
@@ -621,11 +742,15 @@
     html[data-style="moma"] .card { grid-template-columns: 76px minmax(0, 1fr); }
     html[data-style="moma"] .card-actions { grid-column: 2; }
     html[data-style="moma"] .intro h1 { max-width: 10ch; }
+    html[data-style="moma"] .searchbar { height: auto; }
     .style-switch button { padding: 7px 7px; }
   }
   @media (max-width: 390px) {
     .style-switch button { padding: 7px 5px; font-size: 8px; }
+    .status { width: 36px; height: 36px; padding: 0; justify-content: center; }
+    .status::before, .status::after { display: none; }
     .status #status-text { display: none; }
+    html[data-style="moma"] .status { border: 1px solid var(--rule); }
   }
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -645,6 +770,10 @@
   </div>
   <button class="status" id="status" type="button" title="Проверить зеркала">
     <span class="status-square" id="dot"></span><span id="status-text">проверка…</span>
+  </button>
+  <button class="infra-open" id="infra-btn" type="button" title="Инфраструктура Libgen" aria-label="Инфраструктура Libgen">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="3" y="4" width="18" height="6"/><rect x="3" y="14" width="18" height="6"/><path d="M7 7h.01M7 17h.01"/></svg>
+    <span class="infra-text"><span class="h">// infra</span><span class="m">Инфраструктура</span></span>
   </button>
   <button class="icon-btn" id="theme-btn" type="button" title="Инверсия темы" aria-label="Сменить тему">
     <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -812,6 +941,20 @@
   <div class="dialog-body" id="d-body"></div>
 </dialog>
 
+<dialog id="infra">
+  <div class="dialog-head">
+    <span class="dialog-label"><span class="h">cat /api/infra</span><span class="m">Инфраструктура</span></span>
+    <div class="spacer"></div>
+    <button class="icon-btn" id="i-refresh" type="button" title="Обновить данные" aria-label="Обновить данные">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+    </button>
+    <button class="icon-btn" id="i-close" type="button" title="Закрыть" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="infra-body" id="i-body"></div>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -819,7 +962,7 @@
   "use strict";
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
-  const state = { page: 1, lastQuery: "", loading: false, controller: null, lastData: null, lastBook: null };
+  const state = { page: 1, lastQuery: "", loading: false, controller: null, lastData: null, lastBook: null, lastInfra: null };
   const isMoma = () => root.dataset.style === "moma";
   const L = (hack, moma) => (isMoma() ? moma : hack);
 
@@ -914,6 +1057,7 @@
     applyStyleText();
     if (state.lastBook && $("details").open) renderBook(state.lastBook);
     if (state.lastData) renderResults(state.lastData);
+    if (state.lastInfra && $("infra").open) renderInfra(state.lastInfra);
   }
 
   document.querySelectorAll("[data-style-set]").forEach((button) => {
@@ -985,6 +1129,7 @@
       q: $("q").value.trim(),
       page: Number(params.get("page") || 1),
       book: params.get("book") || "",
+      infra: params.get("infra") === "1",
     };
   }
 
@@ -1359,6 +1504,286 @@
     }
   });
 
+  // ------------------------------------------------------------------ infra
+  const fmtBytes = (value) => {
+    const n = Number(value) || 0;
+    if (n <= 0) return "0";
+    const units = ["B", "kB", "MB", "GB", "TB", "PB"];
+    let index = 0;
+    let size = n;
+    while (size >= 1024 && index < units.length - 1) {
+      size /= 1024;
+      index += 1;
+    }
+    const shown = index === 0 || size >= 10 ? Math.round(size) : size.toFixed(1);
+    return `${shown} ${units[index]}`;
+  };
+  const fmtPct = (value) => `${(Number(value || 0) * 100).toFixed(1)}%`;
+  const fmtTime = (value) => {
+    if (!value) return "—";
+    try { return new Date(value).toLocaleString("ru-RU"); } catch { return String(value); }
+  };
+
+  function infraLoading() {
+    return `<div class="infra-empty">${L(
+      "&gt; scanning dns / tls / dbdumps …",
+      "Собираем данные о зеркалах, сертификатах и дампах…"
+    )}</div>`;
+  }
+
+  async function openInfra(force = false) {
+    const dialog = $("infra");
+    if (!dialog.open) dialog.showModal();
+    $("i-body").innerHTML = infraLoading();
+    try {
+      const response = await fetch("/api/infra?dumps=1" + (force ? "&refresh=1" : ""));
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+      state.lastInfra = data;
+      renderInfra(data);
+    } catch (error) {
+      $("i-body").innerHTML = `<div class="error-box">${esc(
+        L("infra failed: ", "Не удалось получить данные: ") + error.message
+      )}</div>`;
+    }
+  }
+
+  function renderInfra(data) {
+    const mirrors = data.mirrors || [];
+    const stats = data.stats || {};
+    const warnings = data.warnings || [];
+    const healthy = mirrors.filter((mirror) => mirror.healthy).length;
+
+    const stat = (value, label) => `
+      <div class="infra-stat"><b>${esc(value)}</b><span>${esc(label)}</span></div>`;
+
+    const mirrorRows = mirrors.map((mirror) => {
+      const tls = mirror.tls || {};
+      const tlsHtml = tls.error
+        ? `<span class="infra-pill bad">tls error</span><span class="infra-sub">${esc(tls.error)}</span>`
+        : `<span>${esc(tls.issuer || "—")}</span>
+           <span class="infra-sub">${esc(tls.not_after ? fmtTime(tls.not_after) : "no cert")}${
+             tls.days_left != null ? ` · ${Math.round(tls.days_left)} d` : ""
+           }</span>`;
+      const ipHtml = mirror.ip
+        ? `<span class="infra-host">${esc(mirror.ip)}</span>
+           <span class="infra-sub">${esc(
+             [mirror.asn, mirror.org, mirror.country].filter(Boolean).join(" · ") || "ASN unknown"
+           )}</span>`
+        : `<span class="infra-bad">no DNS</span>`;
+      const edgeHtml = mirror.cloudflare
+        ? `<span class="infra-pill cf">Cloudflare</span>`
+        : `<span class="infra-pill">${esc(mirror.server || "origin")}</span>`;
+      const statusHtml = mirror.healthy
+        ? `<span class="infra-pill ok">online</span>`
+        : `<span class="infra-pill bad">${esc(mirror.http_status || "down")}</span>`;
+      const changes = (mirror.changes || [])
+        .map((change) => `<span class="infra-sub infra-bad">${esc(change)}</span>`)
+        .join("");
+      return `<tr>
+        <td><span class="infra-host">${esc(mirror.host || mirror.base)}</span>
+          <span class="infra-sub">${esc(mirror.base)}</span>${changes}</td>
+        <td>${ipHtml}</td>
+        <td>${tlsHtml}</td>
+        <td>${edgeHtml}</td>
+        <td class="infra-num">${mirror.latency_ms != null ? esc(mirror.latency_ms + " ms") : "—"}</td>
+        <td>${statusHtml}</td>
+      </tr>`;
+    }).join("");
+
+    const warningItems = warnings.length
+      ? warnings.map((warning) => `<li>
+          <span class="infra-level ${esc(warning.level)}">${esc(warning.level)}</span>
+          <span><b>${esc(warning.host)}</b> · ${esc(warning.message)}</span>
+        </li>`).join("")
+      : `<li><span class="infra-level info">ok</span><span>${
+          L("no warnings", "предупреждений нет")
+        }</span></li>`;
+
+    const chain = data.chain || { steps: [] };
+    const chainHtml = (chain.steps || []).map((step, index) => `
+      ${index ? '<span class="infra-arrow" aria-hidden="true">→</span>' : ""}
+      <div class="infra-step">
+        <b>${esc(step.step)}</b>
+        <span>${esc(step.host)}<br>${esc(step.detail)}</span>
+      </div>`).join("");
+
+    const TRANSPORT_NAMES = {
+      "1000torrent": L("torrent ×1000 files", "торрент ×1000 файлов"),
+      http: "HTTP", ipfs: "IPFS", tor: "Tor", dc: "DC++",
+      ed2k: "eD2k", magnet: "magnet", torrent: "torrent",
+    };
+    const transports = data.transports;
+    let transportsHtml;
+    if (!transports) {
+      transportsHtml = `<div class="infra-empty">${L(
+        "&gt; no transport data yet — press refresh",
+        "Данные о транспортах ещё не загружены — нажмите «Обновить»."
+      )}</div>`;
+    } else if (transports.error) {
+      transportsHtml = `<div class="infra-empty infra-bad">${esc(transports.error)}</div>`;
+    } else {
+      const totals = transports.totals || {};
+      const active = transports.active || {};
+      const bySection = {};
+      for (const section of transports.sections || []) {
+        for (const [kind, count] of Object.entries(section.counts || {})) {
+          if (!count) continue;
+          (bySection[kind] = bySection[kind] || []).push(section.name);
+        }
+      }
+      const kinds = Object.keys(totals).sort((a, b) => (totals[b] || 0) - (totals[a] || 0));
+      const trows = kinds.map((kind) => `
+        <tr>
+          <td class="infra-host">${esc(TRANSPORT_NAMES[kind] || kind)}</td>
+          <td class="infra-num">${esc(totals[kind])}</td>
+          <td class="infra-num">${esc(active[kind] || 0)}</td>
+          <td>${esc((bySection[kind] || []).join(", ") || "—")}</td>
+        </tr>`).join("");
+      const gateways = transports.gateways || {};
+      const gwBlocks = ["ipfs", "tor", "dc", "ed2k", "magnet"]
+        .filter((kind) => (gateways[kind] || []).length)
+        .map((kind) => {
+          const items = gateways[kind].map((entry) => `
+            <li>
+              <span class="infra-level ${entry.active ? "info" : "error"}">${
+                entry.active ? "on" : "off"
+              }</span>
+              <span><b>${esc(entry.name)}</b> · ${esc(entry.url)}<span class="infra-sub">${esc(
+                (entry.sections || []).join(", ")
+              )}</span></span>
+            </li>`).join("");
+          return `<div class="infra-section">
+            <h3 class="infra-section-title">${esc(TRANSPORT_NAMES[kind] || kind)}
+              <span class="count">[${gateways[kind].length}]</span></h3>
+            <ul class="infra-warnings">${items}</ul>
+          </div>`;
+        }).join("");
+      transportsHtml = `
+        <div class="infra-scroll"><table class="infra-table">
+          <thead><tr>
+            <th>${L("transport", "Транспорт")}</th>
+            <th>${L("entries", "Записей")}</th>
+            <th>${L("active", "Активно")}</th>
+            <th>${L("sections", "Разделы")}</th>
+          </tr></thead>
+          <tbody>${trows}</tbody>
+        </table></div>
+        ${gwBlocks}`;
+    }
+
+    const dumps = data.dumps;    let dumpsHtml;
+    if (!dumps) {
+      dumpsHtml = `<div class="infra-empty">${L(
+        "&gt; no dump snapshot yet — press refresh",
+        "Статистика дампов ещё не загружена — нажмите «Обновить»."
+      )}</div>`;
+    } else if (dumps.error) {
+      dumpsHtml = `<div class="infra-empty infra-bad">${esc(dumps.error)}</div>`;
+    } else {
+      const dumpRows = (dumps.collections || []).map((collection) => `
+        <tr>
+          <td class="infra-host">${esc(collection.name)}</td>
+          <td class="infra-num">${esc(collection.files || 0)}</td>
+          <td class="infra-num">${esc(fmtBytes(collection.bytes))}</td>
+          <td>${esc(collection.latest_date || "—")}</td>
+        </tr>`).join("");
+      dumpsHtml = `
+        <div class="infra-scroll"><table class="infra-table">
+          <thead><tr>
+            <th>${L("collection", "Коллекция")}</th>
+            <th>${L("files", "Файлов")}</th>
+            <th>${L("size", "Размер")}</th>
+            <th>${L("latest", "Последний дамп")}</th>
+          </tr></thead>
+          <tbody>${dumpRows || `<tr><td colspan="4" class="infra-empty">${
+            L("empty", "пусто")
+          }</td></tr>`}</tbody>
+        </table></div>
+        <div class="infra-sub">${esc(fmtTime(dumps.fetched_at))} · ${esc(
+          dumps.total_files || 0
+        )} ${L("files", "файлов")} · ${esc(fmtBytes(dumps.total_bytes))}</div>`;
+    }
+
+    $("i-body").innerHTML = `
+      <div class="infra-top">
+        <h2>${L("Infra / Libgen", "Инфраструктура Libgen")}</h2>
+        <span class="infra-stamp">${esc(fmtTime(data.generated_at))}${
+          data.cached ? ` · ${L("cache", "кэш")}` : ""
+        }</span>
+      </div>
+      <div class="infra-stats">
+        ${stat(`${healthy}/${mirrors.length}`, L("mirrors online", "Зеркала online"))}
+        ${stat(fmtPct(stats.dead_file_rate), L("dead-file rate", "Доля мёртвых файлов"))}
+        ${stat(
+          `${stats.downloads_ok || 0}/${stats.download_attempts || 0}`,
+          L("downloads", "Скачивания")
+        )}
+        ${stat(stats.sibling_fallbacks || 0, L("sibling fallbacks", "Fallback на копию"))}
+      </div>
+
+      <div class="infra-section">
+        <h3 class="infra-section-title">${L("mirrors", "Зеркала")}
+          <span class="count">[${mirrors.length}]</span></h3>
+        <div class="infra-scroll"><table class="infra-table">
+          <thead><tr>
+            <th>${L("host", "Хост")}</th>
+            <th>${L("ip / asn", "IP / ASN")}</th>
+            <th>${L("tls", "TLS")}</th>
+            <th>${L("edge", "Front")}</th>
+            <th>${L("latency", "Латентность")}</th>
+            <th>${L("status", "Статус")}</th>
+          </tr></thead>
+          <tbody>${mirrorRows}</tbody>
+        </table></div>
+      </div>
+
+      <div class="infra-section">
+        <h3 class="infra-section-title">${L("warnings", "Монитор")}
+          <span class="count">[${warnings.length}]</span></h3>
+        <ul class="infra-warnings">${warningItems}</ul>
+      </div>
+
+      <div class="infra-section">
+        <h3 class="infra-section-title">${L("download chain", "Цепочка скачивания")}</h3>
+        <div class="infra-chain">${chainHtml}</div>
+      </div>
+
+      <div class="infra-section">
+        <h3 class="infra-section-title">${L("distribution", "Дистрибуция")}
+          <span class="count">[${transports && transports.totals
+            ? Object.values(transports.totals).reduce((a, b) => a + b, 0)
+            : 0}]</span></h3>
+        ${transportsHtml}
+      </div>
+
+      <div class="infra-section">
+        <h3 class="infra-section-title">${L("dbdumps", "Дампы базы")}
+          <span class="count">[${dumps && dumps.collections ? dumps.collections.length : 0}]</span></h3>
+        ${dumpsHtml}
+      </div>
+
+      <div class="infra-actions">
+        <button type="button" class="btn ghost small" id="i-reload">${L(
+          "refresh", "Обновить"
+        )}</button>
+        <span class="infra-sub">${L(
+          "monitor runs in the background",
+          "монитор проверяет домены и сертификаты в фоне"
+        )}</span>
+      </div>`;
+
+    const reload = $("i-reload");
+    if (reload) reload.addEventListener("click", () => openInfra(true));
+  }
+
+  $("infra-btn").addEventListener("click", () => openInfra(false));
+  $("i-refresh").addEventListener("click", () => openInfra(true));
+  $("i-close").addEventListener("click", () => $("infra").close());
+  $("infra").addEventListener("click", (event) => {
+    if (event.target === $("infra")) $("infra").close();
+  });
+
   // ------------------------------------------------------------------ boot
   applyStyleText();
   const boot = restoreFromUrl();
@@ -1367,6 +1792,7 @@
   if (boot.q) runSearch(boot.q, boot.page, { push: false });
   if (boot.book) openBook(boot.book);
   else if (!boot.q) $("q").focus();
+  if (boot.infra) openInfra(false);
 })();
 </script>
 </body>

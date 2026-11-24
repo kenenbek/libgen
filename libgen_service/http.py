@@ -15,7 +15,7 @@ from typing import Iterable
 import requests
 
 from .config import Settings
-from .errors import LibgenUnavailable
+from .errors import FileUnavailable, LibgenUnavailable
 
 
 @dataclass
@@ -48,6 +48,15 @@ class ProbeResult:
     latency_ms: int
     status: int | None = None
     error: str | None = None
+
+
+def _mentions_missing_file(resp: requests.Response) -> bool:
+    """Libgen uses HTTP 500 + "File not found in DB" for dead catalogue rows."""
+    try:
+        body = resp.text
+    except Exception:  # noqa: BLE001 - a broken body is just "not this case"
+        return False
+    return "file not found in db" in body.lower()
 
 
 class HttpClient:
@@ -133,6 +142,7 @@ class HttpClient:
         also accepted (used when a mirror hands us its own CDN link).
         """
         errors: list[str] = []
+        missing_file = False
         max_attempts = attempts or max(1, self.settings.retries)
         candidates = self._candidates()
         tried = 0
@@ -169,16 +179,21 @@ class HttpClient:
                 errors.append(f"{state.base}: {exc}")
                 continue
 
-            if resp.status_code == 429 or resp.status_code >= 500:
-                self._mark_failure(state, f"HTTP {resp.status_code}")
-                errors.append(f"{state.base}: HTTP {resp.status_code}")
-                resp.close()
-                continue
             if resp.status_code >= 400:
+                if _mentions_missing_file(resp):
+                    # The metadata row exists but the file itself is gone.
+                    # That is a property of the file, not of the mirror, so
+                    # do not put the mirror into backoff.
+                    resp.close()
+                    missing_file = True
+                    errors.append(f"{state.base}: file missing")
+                    continue
                 # A 4xx may be mirror-specific; try the next mirror but do not
                 # punish this one with a long backoff.
                 errors.append(f"{state.base}: HTTP {resp.status_code}")
                 resp.close()
+                if resp.status_code == 429 or resp.status_code >= 500:
+                    self._mark_failure(state, f"HTTP {resp.status_code}")
                 continue
 
             self._mark_success(state)
@@ -188,8 +203,13 @@ class HttpClient:
                 pass
             return resp
 
+        if missing_file:
+            raise FileUnavailable(
+                "The file is missing from Libgen storage (File not found in DB)"
+            )
         raise LibgenUnavailable(
-            "All Libgen mirrors failed. " + ("; ".join(errors[-4:]) or "no mirrors configured")
+            "All Libgen mirrors failed. " + ("; ".join(errors[-4:]) or "no mirrors configured"),
+            errors[-4:],
         )
 
     def get(self, path: str, **kwargs) -> requests.Response:

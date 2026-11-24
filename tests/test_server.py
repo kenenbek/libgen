@@ -14,9 +14,23 @@ from libgen_service.server import LibgenServer
 from tests.conftest import DOWNLOAD_PAYLOAD
 
 
+class StubInfra:
+    def report(self, *, refresh: bool = False, dumps: bool = False):
+        return {
+            "generated_at": "2026-11-24T12:00:00+00:00",
+            "cached": False,
+            "mirrors": [],
+            "warnings": [],
+            "dumps": None,
+        }
+
+    def stop(self) -> None:
+        pass
+
+
 @pytest.fixture
 def base_url(api: LibgenAPI):
-    server = LibgenServer(("127.0.0.1", 0), api)
+    server = LibgenServer(("127.0.0.1", 0), api, infra=StubInfra())
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -38,6 +52,15 @@ def test_health_endpoint(base_url: str):
     assert status == 200
     assert data["status"] == "ok"
     assert data["healthy"] == 1
+
+
+def test_infra_endpoint(base_url: str):
+    status, _, data = get_json(base_url + "/api/infra")
+    assert status == 200
+    assert data["mirrors"] == []
+    assert data["stats"]["download_attempts"] == 0
+    assert data["chain"]["steps"][0]["step"] == "search"
+    assert "libgen.li" in data["chain"]["mirrors"][0]
 
 
 def test_index_page_is_served(base_url: str):
@@ -90,6 +113,20 @@ def test_download_endpoint_streams_file(base_url: str, payload_md5: str):
     assert body == DOWNLOAD_PAYLOAD
     assert "attachment" in disposition
     assert "book.pdf" in disposition
+
+
+def test_download_missing_file_returns_html_page(
+    base_url: str, api: LibgenAPI, payload_md5: str
+):
+    api.client.missing_file = True
+    url = base_url + "/api/download/" + payload_md5
+    with pytest.raises(urllib.error.HTTPError) as excinfo:
+        urllib.request.urlopen(url, timeout=10)
+    assert excinfo.value.code == 404
+    assert "text/html" in excinfo.value.headers["Content-Type"]
+    body = excinfo.value.read().decode()
+    assert "Файл недоступен" in body
+    assert '"error"' not in body
 
 
 def test_download_rejects_bad_md5(base_url: str):

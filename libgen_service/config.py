@@ -11,6 +11,7 @@ DEFAULT_MIRRORS: tuple[str, ...] = (
     "https://libgen.la",
     "https://libgen.bz",
     "https://libgen.gl",
+    "https://libgen.vg",
 )
 
 DEFAULT_USER_AGENT = (
@@ -56,6 +57,7 @@ class Settings:
     cache_ttl: int = 600
     user_agent: str = DEFAULT_USER_AGENT
     proxy: str | None = None
+    monitor_interval: float = 6 * 3600
 
     @classmethod
     def load(cls) -> "Settings":
@@ -81,6 +83,9 @@ class Settings:
             cache_ttl=max(0, _env_int("LIBGEN_CACHE_TTL", 600)),
             user_agent=os.environ.get("LIBGEN_USER_AGENT") or DEFAULT_USER_AGENT,
             proxy=proxy or None,
+            monitor_interval=max(
+                0.0, _env_float("LIBGEN_MONITOR_INTERVAL", 6 * 3600)
+            ),
         )
 
     def with_overrides(self, **kwargs) -> "Settings":
@@ -93,6 +98,7 @@ class Settings:
             "cache_ttl": self.cache_ttl,
             "user_agent": self.user_agent,
             "proxy": self.proxy,
+            "monitor_interval": self.monitor_interval,
         }
         data.update({k: v for k, v in kwargs.items() if v is not None})
         return Settings(**data)

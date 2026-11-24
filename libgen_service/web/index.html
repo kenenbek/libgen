@@ -1215,6 +1215,39 @@
     return `<div class="empty"><h3>${esc(title)}</h3><p>${esc(text)}</p></div>`;
   }
 
+  const EXT_ORDER = ["pdf", "epub", "fb2", "djvu", "mobi", "azw3", "cbz", "txt"];
+
+  function groupBooks(items) {
+    // Libgen lists every file of the same book as its own row; collapse
+    // copies of one title+author into a single card with format badges.
+    const norm = (value) =>
+      (value || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+    const groups = new Map();
+    for (const book of items) {
+      const key = norm(book.title) + "|" + norm(book.author);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(book);
+    }
+    return [...groups.values()].map((members) => {
+      const withFiles = members.filter((book) => (book.files || []).length);
+      const pool = withFiles.length ? withFiles : members;
+      const rep = pool.find((book) => book.cover_url) || pool[0];
+      const extensions = [];
+      for (const member of members) {
+        for (const ext of member.extensions || []) {
+          const value = String(ext).toLowerCase();
+          if (value && !extensions.includes(value)) extensions.push(value);
+        }
+      }
+      extensions.sort((a, b) => {
+        const ia = EXT_ORDER.indexOf(a);
+        const ib = EXT_ORDER.indexOf(b);
+        return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+      });
+      return { rep, count: members.length, extensions };
+    });
+  }
+
   function renderMetaChips() {
     const filters = readFilters();
     const chips = [];
@@ -1233,16 +1266,17 @@
   function renderResults(data) {
     state.lastData = data;
     const items = data.items || [];
+    const groups = groupBooks(items);
     $("meta-row").hidden = false;
     $("meta-text").innerHTML = items.length
       ? (isMoma()
-        ? `${items.length} из ${data.found} · всего ${data.total} · ${data.elapsed_ms} мс${data.cached ? " · кэш" : ""}`
-        : `${items.length}/${data.found} · db:${data.total} · ${data.elapsed_ms}ms${data.cached ? " · cache" : ""}`)
+        ? `${groups.length} из ${data.found}${groups.length !== items.length ? ` · копий: ${items.length}` : ""} · всего ${data.total} · ${data.elapsed_ms} мс${data.cached ? " · кэш" : ""}`
+        : `${groups.length}/${data.found}${groups.length !== items.length ? ` · copies:${items.length}` : ""} · db:${data.total} · ${data.elapsed_ms}ms${data.cached ? " · cache" : ""}`)
       : (isMoma() ? `0 результатов · всего ${data.total}` : `0 results · db:${data.total}`);
     renderMetaChips();
     terminalLine(
       items.length
-        ? `${items.length}/${data.found} results · ${data.elapsed_ms}ms${data.cached ? " · cache" : " · live"}`
+        ? `${groups.length}/${data.found} results · ${data.elapsed_ms}ms${data.cached ? " · cache" : " · live"}`
         : `0 results · db:${data.total}`
     );
 
@@ -1256,12 +1290,13 @@
     }
 
     const offset = (data.page - 1) * data.per_page;
-    $("results").innerHTML = items.map((book, index) => {
+    $("results").innerHTML = groups.map((group, index) => {
+      const book = group.rep;
       const file = book.files?.[0];
       const cover = book.cover_url || "";
       const eyebrow = book.series || book.topic_name || "";
       const badges = [];
-      for (const ext of book.extensions || []) {
+      for (const ext of group.extensions) {
         badges.push(`<span class="badge ext">${esc(ext)}</span>`);
       }
       if (file?.size_display) badges.push(`<span>${esc(file.size_display.toLowerCase())}</span>`);
@@ -1269,6 +1304,11 @@
       const lang = book.language || book.language_name;
       if (lang) badges.push(`<span>${esc(lang)}</span>`);
       if (book.year) badges.push(`<span>${esc(book.year)}</span>`);
+      if (group.count > 1) {
+        badges.push(`<span class="badge copies" title="${L(
+          "копий/изданий в выдаче", "копий или изданий этой книги в выдаче"
+        )}">×${group.count}</span>`);
+      }
 
       const author = book.author ? `<b>${esc(book.author)}</b>` : "<b>автор неизвестен</b>";
       const byline = [author];
@@ -1439,15 +1479,27 @@
     kv("--topic", "Раздел", book.topic_name);
     kv("--edition-id", "ID издания", book.edition_id);
 
-    const filesHtml = files.map((file) => `
+    const filesHtml = files.map((file) => {
+      const isbnList = Array.isArray(book.isbn) ? book.isbn : String(book.isbn || "").split(/[\s,;]+/);
+      const isbn = isbnList.find((v) => /^[0-9Xx]{10,13}$/.test(v)) || "";
+      const iaUrl = isbn
+        ? `https://archive.org/search?and%5B%5D=identifier%3A${encodeURIComponent(isbn)}`
+        : `https://archive.org/search?query=${encodeURIComponent(((book.title || "") + " " + (book.author || "")).trim())}`;
+      return `
       <div class="file-row">
         <span class="t-prompt">&gt;</span>
         <span class="badge ext">${esc(file.extension || "file")}</span>
         <span class="fname">${esc(file.filename || file.md5)}</span>
         <span class="fmeta">${esc(file.size_display)}${file.pages ? " · " + file.pages + "pp" : ""}</span>
+        <span class="avail" data-avail="${esc(file.md5)}" title="${L("проверяем доступность файла…", "Проверяем доступность файла…")}">…</span>
         <a class="btn primary small" href="${esc(file.download_url)}">${isMoma() ? "Скачать" : "скачать"}</a>
         <button type="button" class="btn ghost small" data-direct="${esc(file.md5)}">${isMoma() ? "ссылка" : "url"}</button>
-      </div>`).join("");
+        <span class="fallback-links" data-fallback="${esc(file.md5)}" hidden>
+          <a href="https://annas-archive.org/md5/${esc(file.md5)}" target="_blank" rel="noopener">annas&nbsp;↗</a>
+          <a href="${esc(iaUrl)}" target="_blank" rel="noopener">archive.org&nbsp;↗</a>
+        </span>
+      </div>`;
+    }).join("");
 
     const description = book.description
       ? `<div class="section-title">${isMoma() ? "Описание" : "description"}</div><div class="description">${esc(book.description)}</div>`
@@ -1475,6 +1527,42 @@
       ${description}
       ${toc}
     `;
+    probeAvailability();
+  }
+
+  async function probeAvailability() {
+    const badges = document.querySelectorAll("#d-body [data-avail]");
+    await Promise.all([...badges].map(async (el) => {
+      const md5 = el.dataset.avail;
+      try {
+        const response = await fetch("/api/availability/" + encodeURIComponent(md5));
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        if (!$("details").open || !el.isConnected) return;
+        if (data.status === "ok") {
+          el.className = "avail ok";
+          el.textContent = L("online", "доступен");
+          el.title = L("файл отвечает на CDN", "Файл отвечает на CDN");
+        } else if (data.status === "missing") {
+          el.className = "avail missing";
+          el.textContent = L("dead file", "файла нет");
+          el.title = L(
+            "запись есть, но файл удалён с зеркал",
+            "Запись есть в каталоге, но файл удалён с зеркал"
+          );
+          const fallback = document.querySelector(`#d-body [data-fallback="${md5}"]`);
+          if (fallback) fallback.hidden = false;
+        } else {
+          el.className = "avail unknown";
+          el.textContent = L("unknown", "неизвестно");
+          el.title = L("зеркала не ответили", "Зеркала не ответили");
+        }
+      } catch {
+        if (!el.isConnected) return;
+        el.className = "avail unknown";
+        el.textContent = "?";
+      }
+    }));
   }
 
   $("d-close").addEventListener("click", () => $("details").close());

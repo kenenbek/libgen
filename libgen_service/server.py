@@ -128,6 +128,9 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
             return self._send_json(
                 {"md5": info["md5"], "url": info["url"], "mirror": info.get("mirror")}
             )
+        if path.startswith("/api/availability/"):
+            md5 = path.rsplit("/", 1)[-1]
+            return self._send_json(self.server.api.check_availability(md5))
         if path.startswith("/api/cover/"):
             md5 = path.rsplit("/", 1)[-1]
             return self._cover(md5, self._one(query, "libgen_id"))
@@ -255,7 +258,9 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
                 HTTPStatus.NOT_FOUND,
                 "Файл недоступен",
                 "Запись есть в каталоге, но самого файла нет на зеркалах "
-                "Libgen. Попробуйте другое издание или другой формат.",
+                "Libgen. Попробуйте другое издание или другой формат — "
+                "или поищите книгу во внешних каталогах.",
+                links=self._external_links(md5),
             )
         except (InvalidInput, NotFound) as exc:
             if headers_sent:
@@ -319,6 +324,36 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
                     seen.append(candidate)
         return seen
 
+    def _external_links(self, md5: str) -> list[tuple[str, str]]:
+        """Best-effort links to external catalogues for a dead file."""
+        links = [
+            ("Anna's Archive", f"https://annas-archive.org/md5/{md5}"),
+        ]
+        try:
+            info = self.server.api.file(md5)
+        except LibgenError:
+            info = {}
+        book = ((info.get("editions") or [{}])[0]) if info else {}
+        isbn = ""
+        for value in (book.get("isbn") or "").replace(",", " ").split():
+            digits = "".join(ch for ch in value if ch.isdigit() or ch in "Xx")
+            if len(digits) in (10, 13):
+                isbn = digits
+                break
+        if isbn:
+            links.append(
+                (
+                    "Internet Archive",
+                    f"https://archive.org/search?and%5B%5D=identifier%3A{quote(isbn)}",
+                )
+            )
+        elif book.get("title"):
+            query = quote(f"{book['title']} {book.get('author') or ''}".strip())
+            links.append(
+                ("Internet Archive", f"https://archive.org/search?query={query}")
+            )
+        return links
+
     def _download_error_page(
         self,
         md5: str,
@@ -327,9 +362,15 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
         message: str,
         *,
         detail: str | None = None,
+        links: list[tuple[str, str]] | None = None,
     ) -> int:
         detail_html = (
             f'<pre class="detail">{html.escape(detail)}</pre>' if detail else ""
+        )
+        extra_links = "".join(
+            f'<a href="{html.escape(url, quote=True)}" rel="noopener" target="_blank">'
+            f"{html.escape(label)} &#8599;</a>"
+            for label, url in (links or [])
         )
         body = f"""<!doctype html>
 <html lang="ru">
@@ -371,6 +412,7 @@ class LibgenRequestHandler(BaseHTTPRequestHandler):
   <p class="actions">
     <a class="primary" href="/?q={quote(md5)}">Искать это издание</a>
     <a href="/">Вернуться к поиску</a>
+    {extra_links}
   </p>
 </main>
 </body>

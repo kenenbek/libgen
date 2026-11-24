@@ -920,6 +920,53 @@ class LibgenAPI:
         self.note_download_error(message)
         raise DownloadError(message)
 
+    def check_availability(self, md5: str) -> dict[str, Any]:
+        """Cheap probe: can this file actually be downloaded right now?
+
+        Opens the CDN stream, reads only the headers and closes.  The result
+        is cached: "missing" files occasionally reappear, so even a negative
+        answer expires after 15 minutes.
+        """
+        md5 = self._validate_md5(md5)
+        cache_key = f"avail:{md5}"
+        cached = self.cache.get(cache_key)
+        if isinstance(cached, dict) and cached.get("status"):
+            return cached
+        result: dict[str, Any] = {
+            "md5": md5,
+            "status": "unknown",
+            "checked_at": time.time(),
+        }
+        try:
+            info = self.resolve(md5)
+            response = self.client.request(
+                "GET",
+                info["url"],
+                headers={
+                    "Referer": info.get("ads_url") or "https://libgen.li/",
+                    "Accept": "*/*",
+                    "Range": "bytes=0-0",
+                },
+                stream=True,
+                allow_redirects=True,
+                timeout=max(30.0, self.settings.timeout),
+                attempts=1,
+            )
+            try:
+                content_type = (response.headers.get("Content-Type") or "").lower()
+                ok = response.status_code < 400 and "text/html" not in content_type
+                result["status"] = "ok" if ok else "unknown"
+                result["size"] = int(response.headers.get("Content-Length") or 0)
+            finally:
+                response.close()
+        except FileUnavailable:
+            result["status"] = "missing"
+        except LibgenError:
+            result["status"] = "unknown"
+        # Do not pin "unknown" for long: it usually means a flaky mirror.
+        self.cache.set(cache_key, result, ttl=900 if result["status"] != "unknown" else 60)
+        return result
+
     def _fallback_filename(self, md5: str) -> str:
         try:
             fid = self._file_id_for_md5(md5)
